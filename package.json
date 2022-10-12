@@ -1,0 +1,24 @@
+{
+  "name": "yandex-middle-dev",
+  "version": "1.0.0",
+  "description": "online six month course in yandex practicum",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kan88/middle.messenger.praktikum.yandex.git"
+  },
+  "keywords": [
+    "JS",
+    "Handlebars",
+    "Postcss"
+  ],
+  "author": "Evgeny Kan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kan88/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/kan88/middle.messenger.praktikum.yandex#readme"
+}
