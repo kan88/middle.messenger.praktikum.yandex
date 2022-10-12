@@ -23,6 +23,7 @@
   "homepage": "https://github.com/kan88/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "@inventory/parcel-plugin-handlebars": "^1.0.0",
+    "@parcel/transformer-sass": "^2.7.0",
     "handlebars": "^4.7.7",
     "parcel": "^2.7.0"
   }
