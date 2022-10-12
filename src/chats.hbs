@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Учебный проект: страница чатов</title>
+</head>
+
+<body>
+  <div class="chat">
+    <ul class="chat__list">
+      {{> chat-item class="chat__item chat__item--actual" name="Harry" date="12.10.22" message="Hi there" }}
+      {{> chat-item class="chat__item" name="Hermiona" date="11.10.22" message="Good luck" }}
+      {{> chat-item class="chat__item" name="Rone" date="10.10.22" message="ok" }}
+    </ul>
+    {{> link label="Settings" class="chat__item chat__item--settings" link="./set.hbs" }}
+  </div>
+  <div class="messages">
+    <ul class="messages__list">
+      {{> message-item date="12.10.22 08:30" text="Hi there" class="message__item message__item--user"}}
+      {{> message-item date="12.10.22 08:40" text="Hi my friend" class="message__item message__item--opponent"}}
+      {{> message-item date="12.10.22 08:40" text="How are you" class="message__item message__item--opponent"}}
+    </ul>
+  </div>
+</body>
+
+</html>
