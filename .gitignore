@@ -10,3 +10,4 @@ npm-debug.log*
 Thumbs.db
 .vscode/
 .parcel-cache
+node_modules
