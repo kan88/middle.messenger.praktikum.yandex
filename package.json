@@ -2,7 +2,6 @@
   "name": "yandex-middle-dev",
   "version": "1.0.0",
   "description": "online six month course in yandex practicum",
-  "main": "handlebars.config.js",
   "scripts": {
     "start": "parcel src/index.hbs -p 3000",
     "build": "parcel build src/index.hbs",
