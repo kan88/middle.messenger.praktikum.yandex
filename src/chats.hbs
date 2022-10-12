@@ -6,9 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Учебный проект: страница чатов</title>
+  <link rel="stylesheet" href="./sass/style.scss" />
 </head>
 
-<body>
+<body class="main">
   <div class="chat">
     <ul class="chat__list">
       {{> chat-item class="chat__item chat__item--actual" name="Harry" date="12.10.22" message="Hi there" }}
@@ -19,9 +20,9 @@
   </div>
   <div class="messages">
     <ul class="messages__list">
-      {{> message-item date="12.10.22 08:30" text="Hi there" class="message__item message__item--user"}}
-      {{> message-item date="12.10.22 08:40" text="Hi my friend" class="message__item message__item--opponent"}}
-      {{> message-item date="12.10.22 08:40" text="How are you" class="message__item message__item--opponent"}}
+      {{> messages-item date="12.10.22 08:30" text="Hi there" class="messages__item--user"}}
+      {{> messages-item date="12.10.22 08:40" text="Hi my friend" class="messages__item--opponent"}}
+      {{> messages-item date="12.10.22 08:40" text="How are you" class="messages__item--opponent"}}
     </ul>
   </div>
 </body>
