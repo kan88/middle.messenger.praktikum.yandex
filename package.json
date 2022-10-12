@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "online six month course in yandex practicum",
   "scripts": {
-    "start": "parcel src/index.hbs -p 3000",
+    "start": "parcel serve src/index.hbs -p 3000 --open",
     "build": "parcel build src/index.hbs",
     "watch": "parcel src/index.hbs watch -p 3000"
   },
