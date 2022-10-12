@@ -1,28 +1,31 @@
 {
-  "name": "yandex-practicum-middle",
+  "name": "yandex-middle-dev",
   "version": "1.0.0",
-  "license": "MIT",
+  "description": "online six month course in yandex practicum",
+  "main": "handlebars.config.js",
   "scripts": {
     "start": "parcel src/index.hbs -p 3000",
-    "build": "parcel build src/index.hbs"
+    "build": "parcel build src/index.hbs",
+    "watch": "parcel src/index.hbs watch -p 3000"
   },
-  "dependencies": {
-    "@anikin/parcel-transformer-handlebars": "^1.0.9",
-    "handlebars": "^4.7.7",
-    "parcel": "^2.7.0"
-  },
-  "description": "Учебный проект Кан Евгения на курсе Миддл-фронтенд разработчик от Яндекс Практикум",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kan88/middle.messenger.praktikum.yandex.git"
   },
+  "keywords": [
+    "JS",
+    "Handlebars",
+    "Postcss"
+  ],
   "author": "Evgeny Kan",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kan88/handlebars-parcel-examples/issues"
+    "url": "https://github.com/kan88/middle.messenger.praktikum.yandex/issues"
   },
-  "engines" : { 
-    "npm" : ">=8.0.0 <9.0.0",
-    "node" : ">=16.0.0 <17.0.0"
-  },
-  "homepage": "https://github.com/kan88/handlebars-parcel-examples#readme"
+  "homepage": "https://github.com/kan88/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "handlebars": "^4.7.7",
+    "parcel": "^2.7.0"
+  }
 }
