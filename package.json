@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "online six month course in yandex practicum",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/server.js",
     "build": "parcel build src/index.hbs src/sass/style.scss --no-optimize",
     "watch": "parcel src/index.hbs watch -p 3000"
   },
