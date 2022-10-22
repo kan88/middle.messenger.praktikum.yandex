@@ -1,5 +1,5 @@
 const test = (message: string): void => {
-    console.log(message);
-}
+  console.log(message);
+};
 
-test('Тест работы компилятора TS пройден успешно')
+test('Тест работы компилятора TS пройден успешно');

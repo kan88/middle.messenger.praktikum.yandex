@@ -5,7 +5,9 @@
   "scripts": {
     "start": "node src/server.js",
     "build": "parcel build src/index.hbs src/sass/style.scss --no-optimize",
-    "watch": "parcel src/index.hbs watch -p 3000"
+    "watch": "parcel src/index.hbs watch -p 3000",
+    "tsc": "tsc src/index.ts",
+    "lint": "eslint src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,10 @@
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
     "@parcel/transformer-sass": "2.7.0",
+    "@typescript-eslint/eslint-plugin": "5.40.1",
+    "@typescript-eslint/parser": "5.40.1",
+    "eslint": "8.26.0",
+    "eslint-config-airbnb": "19.0.4",
     "express": "4.18.2",
     "handlebars": "4.7.7",
     "npm-path": "2.0.4",
