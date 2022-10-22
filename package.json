@@ -1,0 +1,33 @@
+{
+  "name": "yandex-middle-dev",
+  "version": "1.0.0",
+  "description": "online six month course in yandex practicum",
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "parcel build src/index.hbs src/sass/style.scss --no-optimize",
+    "watch": "parcel src/index.hbs watch -p 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kan88/middle.messenger.praktikum.yandex.git"
+  },
+  "keywords": [
+    "JS",
+    "Handlebars",
+    "Postcss"
+  ],
+  "author": "Evgeny Kan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kan88/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/kan88/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@parcel/transformer-sass": "2.7.0",
+    "express": "4.18.2",
+    "handlebars": "4.7.7",
+    "npm-path": "2.0.4",
+    "parcel": "2.7.0"
+  }
+}

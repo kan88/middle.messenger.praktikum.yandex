@@ -1,0 +1,43 @@
+.messages {
+    width: 70%;
+    border: 1px solid $denary;
+}
+
+.messages__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.messages__date {
+    color: $secondary;
+    font-size: 10px;
+}
+
+.messages__text {
+    margin: 0;
+    color: $tertiary;
+    background-color: $denary;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 10px;
+
+}
+
+.messages__item {
+    color: $denary;
+    max-width: 70%;
+
+    &--user {
+        text-align: left;
+    }
+
+    &--opponent {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+        margin-left: auto;
+    }
+}
+
