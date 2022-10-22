@@ -4,10 +4,10 @@
   "description": "online six month course in yandex practicum",
   "scripts": {
     "start": "node src/server.js",
-    "build": "parcel build src/index.hbs src/sass/style.scss --no-optimize",
+    "build": "parcel build src/index.hbs src/sass/style.scss src/index.ts --no-optimize",
     "watch": "parcel src/index.hbs watch -p 3000",
-    "tsc": "tsc src/index.ts",
-    "lint": "eslint src/index.ts"
+    "lint": "eslint src/*.ts src/*.js",
+    "stylelint": "stylelint --fix \"src/sass/**/*.scss\" --custom-syntax postcss-scss"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,9 @@
     "handlebars": "4.7.7",
     "npm-path": "2.0.4",
     "parcel": "2.7.0",
+    "postcss-scss": "^4.0.5",
+    "stylelint": "^14.14.0",
+    "stylelint-config-htmlacademy": "^1.1.2",
     "typescript": "4.8.4"
   }
 }

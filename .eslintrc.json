@@ -8,5 +8,5 @@
     "@typescript-eslint/no-unused-vars": 2,
     "no-unused-vars": 2,
     "max-params": [2, 3]
-    }
+  }
 }
