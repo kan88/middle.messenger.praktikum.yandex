@@ -1,9 +1,7 @@
 import template from './index.tmpl';
-import {
-  Component,
-} from '../../../utils/Components';
+import Block from '../../../utils/Block';
 
-export default class Auth extends Component {
+export default class Auth extends Block {
   render() {
     return this.compile(template);
   }

@@ -1,9 +1,7 @@
 import template from './links.tmpl';
-import {
-  Component,
-} from '../../../utils/Components';
+import Block from '../../../utils/Block';
 
-export default class Links extends Component {
+export default class Links extends Block {
   render() {
     return this.compile(template);
   }

@@ -1,9 +1,7 @@
 import template from './inputs.tmpl';
-import {
-  Component,
-} from '../../../utils/Components';
+import Block from '../../../utils/Block';
 
-export default class Inputs extends Component {
+export default class Inputs extends Block {
   render() {
     return this.compile(template);
   }

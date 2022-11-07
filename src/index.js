@@ -1,9 +1,7 @@
-import Inputs from './templates/components/inputs';
-import Links from './templates/components/links';
+import Inputs from '/src/templates/components/inputs/inputs';
+import Links from '/src/templates/components/links/links';
 import Auth from './templates/pages/auth';
-import {
-  render,
-} from './utils/render';
+import renderDom from './utils/render';
 
 const inputs = new Inputs('div', {
   items: [{
@@ -50,4 +48,5 @@ const form = new Auth('form', {
   },
 });
 
-render('.app', form);
+console.log(form);
+renderDom('.app', form);
