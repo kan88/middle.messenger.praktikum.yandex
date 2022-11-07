@@ -1,7 +1,10 @@
 import Handlebars from 'handlebars';
-import EventBus from './eventbus';
+import {
+  v4 as makeUUID,
+} from 'uuid';
+import EventBus from './EventBus';
 
-export default class Block {
+export default class Component {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -10,7 +13,11 @@ export default class Block {
   };
 
   _element = null;
-
+  _props;
+  _children;
+  _id;
+  _eventBus;
+  _setUpdate = false;
   _meta = null;
 
   /** JSDoc
@@ -19,17 +26,25 @@ export default class Block {
    *
    * @returns {void}
    */
-  constructor(tagName = 'div', props = {}) {
+  constructor(tagName = 'div', propsAndChilds = {}) {
     const eventBus = new EventBus();
+    const {
+      children,
+      props
+    } = this.getChildren(propsAndChilds);
     this._meta = {
       tagName,
       props,
     };
-
-    this.props = this._makePropsProxy(props);
+    this._children = children;
+    this._children = this._makePropsProxy(children);
+    this.props = this._makePropsProxy({
+      ...props,
+      __id: this._id
+    });
 
     this.eventBus = () => eventBus;
-
+    this._id = makeUUID();
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
@@ -52,6 +67,14 @@ export default class Block {
     this._createResources();
 
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+  }
+
+  createDocumentElement(tag) {
+    const element = document.createElement(tag);
+    if (this._props.settings ? .withInternalID) {
+      element.setAttribute('data-id', this._id);
+    }
+    return element;
   }
 
   _componentDidMount() {
@@ -84,17 +107,80 @@ export default class Block {
     Object.assign(this.props, nextProps);
   };
 
-  get element() {
+  getelement() {
     return this._element;
   }
 
   _render() {
     const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
+    this.removeEvents();
+    this._element.innerHTML = '';
+    this._element.appendChild(block);
+    this.addEvents();
+    this.addAttribute();
+  }
+
+  removeEvents() {
+    const {
+      events = {}
+    } = this._props;
+
+    Object.leys(events).forEach((eventName) => {
+      this._element.removeEventListener(eventName, events[eventName])
+    })
+  }
+
+  addEvents() {
+    const {
+      events = {}
+    } = this._props;
+
+    Object.leys(events).forEach((eventName) => {
+      this._element.addEventListener(eventName, events[eventName])
+    })
+  }
+
+  addAttribute() {
+    const {
+      attr = {}
+    } = this._props;
+    Object.entries(attr).forEach(([key, value]) => {
+      this._element.setAttribute(key, value);
+    });
+  }
+
+  getChildren(propsAndChilds) {
+    const children = {};
+    const props = {};
+    Object.keys(propsAndChilds).forEach(key => {
+      if (propsAndChilds[key] instanceof Component) {
+        children[key] = propsAndChilds[key];
+      } else {
+        props[key] = propsAndChilds[key];
+      }
+    })
+  }
+
+  compile(template, props) {
+    if (typeof (props) == 'undefined')
+      props = this._props;
+    const propsAndStubs = {
+      ...props
+    };
+    Object.entries(this._children).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+    });
+
+    const fragment = this.createDocumentElement('template');
+    fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
+
+    Object.values(this._children).forEach(child => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+      if (stub) {
+        stub.replace(child.getContent());
+      }
+    })
+    return fragment.content;
   }
 
   render() {}
