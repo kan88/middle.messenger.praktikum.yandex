@@ -1,7 +1,7 @@
 import { v4 as makeUUID } from 'uuid';
 import Handlebars from "handlebars";
-import EventBus from './EventBus';
-import { typeDict, typeMixedUnknownProps } from './types'
+import EventBus from './Eventbus';
+import { typeDict, typeMixed } from './types'
 import isBlock from '../utils/isBlock';
 import isBlockArray from "../utils/isBlockArray";
 
@@ -13,15 +13,15 @@ export default class Block {
     FLOW_RENDER: "flow:render"
   }
 
-  _props: typeMixedUnknownProps;
+  _props: typeMixed;
   _children: typeDict<Block>;
   _childrenArray: typeDict<Block[]>;
   _id: string;
   _element: HTMLElement;
-  _meta: { tag: string; props?: typeMixedUnknownProps; };
+  _meta: { tag: string; props?: typeMixed; };
   _eventBus: EventBus;
 
-  constructor(tag: string = "div", propsAndChildren: typeMixedUnknownProps = {}) {
+  constructor(tag: string = "div", propsAndChildren: typeMixed = {}) {
     const { children, childrenArray, props } = this.getChildren(propsAndChildren);
 
     this._eventBus = new EventBus();
@@ -35,10 +35,10 @@ export default class Block {
     this._eventBus.emit(Block.EVENTS.INIT);
   }
 
-  getChildren(propsAndChildren: typeMixedUnknownProps): { children: typeDict<Block>; childrenArray: typeDict<Block[]>; props: typeMixedUnknownProps; } {
+  getChildren(propsAndChildren: typeMixed): { children: typeDict<Block>; childrenArray: typeDict<Block[]>; props: typeMixed; } {
     const children: typeDict<Block> = {};
     const childrenArray: typeDict<Block[]> = {};
-    const props: typeMixedUnknownProps = {};
+    const props: typeMixed = {};
 
     Object.keys(propsAndChildren).forEach(key => {
       const value = propsAndChildren[key];
@@ -115,20 +115,20 @@ export default class Block {
     }
   }
 
-  _componentDidUpdate(oldProps: typeMixedUnknownProps & typeDict<Block>, newProps: typeMixedUnknownProps & typeDict<Block>): void {
+  _componentDidUpdate(oldProps: typeMixed & typeDict<Block>, newProps: typeMixed & typeDict<Block>): void {
     const isReRender: boolean = this.componentDidUpdate(oldProps, newProps);
     if (isReRender) {
       this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  componentDidUpdate(oldProps: typeMixedUnknownProps & typeDict<Block>, newProps: typeMixedUnknownProps & typeDict<Block>): boolean {
+  componentDidUpdate(oldProps: typeMixed & typeDict<Block>, newProps: typeMixed & typeDict<Block>): boolean {
     console.log(newProps, oldProps);
 
     return true;
   }
 
-  setProps(newProps: typeMixedUnknownProps): void {
+  setProps(newProps: typeMixed): void {
     if (!newProps) {
       return;
     }
@@ -167,13 +167,13 @@ export default class Block {
     return this._element;
   }
 
-  makePropsProxy(props: typeMixedUnknownProps) {
+  makePropsProxy(props: typeMixed) {
     return new Proxy(props, {
-      get: (target: typeMixedUnknownProps, prop: string) => {
+      get: (target: typeMixed, prop: string) => {
         const value = target[prop];
         return typeof (value) === 'function' ? value.bind(target) : value;
       },
-      set: (target: typeMixedUnknownProps, prop: string, value) => {
+      set: (target: typeMixed, prop: string, value) => {
         const oldProp = { ...target };
         target[prop] = value;
         this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldProp, target);
@@ -201,7 +201,7 @@ export default class Block {
     this.getContent().style.display = 'none';
   }
 
-  compile(template: string, props?: typeMixedUnknownProps): DocumentFragment {
+  compile(template: string, props?: typeMixed): DocumentFragment {
     if (typeof (props) == 'undefined') {
       props = this._props;
     }
