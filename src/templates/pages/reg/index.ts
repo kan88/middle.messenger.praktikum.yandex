@@ -51,6 +51,10 @@ const inputs = new Inputs('div', {
   attr: {
     class: 'reg__input-wrapper',
   },
+  events: {
+    focusin: (evt) => Controller.onValidate(evt),
+    focusout: (evt) => Controller.onValidate(evt),
+  },
 });
 
 const buttons = new Buttons('div', {
@@ -61,6 +65,9 @@ const buttons = new Buttons('div', {
   }],
   attr: {
     class: 'reg__btn-wrapper',
+  },
+  events: {
+    submit: (evt) => Controller.onSubmit(evt),
   },
 });
 
@@ -78,10 +85,3 @@ const reg = new Reg('form', {
 
 renderDom('.app', reg);
 
-document.querySelectorAll('INPUT').forEach((item) => {
-  item.addEventListener('focus', (evt) => Controller.onValidate(evt));
-});
-
-document.querySelectorAll('INPUT').forEach((item) => {
-  item.addEventListener('blur', (evt) => Controller.onValidate(evt));
-});

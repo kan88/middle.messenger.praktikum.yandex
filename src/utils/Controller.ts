@@ -22,9 +22,9 @@ const Controller = {
     inputs.forEach((input) => {
       if (isSubmit(input)) {
         View.showError(isValid(evt));
-        return
+        return;
       }
-      console.log(input.value)
+      console.log(input.value);
     });
   },
 };

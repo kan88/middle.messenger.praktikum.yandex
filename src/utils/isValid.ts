@@ -15,7 +15,7 @@ export default function isValid(evt: any): string {
       message = 'специальные символы не допускаются';
     }
   }
-  if (target.id === 'login') {
+  if (target.id === 'login' || target.id === 'auth_login') {
     if (value.length === 0) {
       message = 'Не может быть пустым';
     } else if (value.length < 3) {
@@ -50,7 +50,7 @@ export default function isValid(evt: any): string {
     }
   }
 
-  if (target.id === 'password') {
+  if (target.id === 'password' || target.id === 'auth_pass' || target.id === 'password_new') {
     if (!value.match(/^[a-zA-Z0-9-_]/g)) { // пример регулярного выражения
       message = 'только латинские';
     } else if (value.length > 40) {
