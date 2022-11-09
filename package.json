@@ -4,7 +4,7 @@
   "description": "online six month course in yandex practicum",
   "scripts": {
     "start": "node src/server.js",
-    "build": "parcel build src/sass/style.scss ./src/index.ts src/index.html  src/templates/pages/**/**.html --no-optimize",
+    "build": "parcel build src/sass/style.scss src/index.html  src/templates/pages/**/**.html --no-optimize",
     "watch": "parcel src/index.hbs watch -p 3000",
     "lint": "eslint src/*.ts src/*.js",
     "stylelint": "stylelint --fix \"src/sass/**/*.scss\" --custom-syntax postcss-scss"
