@@ -1,5 +1,7 @@
 .auth__input-wrapper {
   padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .auth__btn-wrapper {

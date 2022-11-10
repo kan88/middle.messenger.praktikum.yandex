@@ -1,7 +1,14 @@
 export default function isValid(evt: any): string {
+  let value: any;
+  let target: any;
+  if (evt instanceof Element) {
+    value = evt.value;
+    target = evt;
+  } else {
+    value = evt.target.value;
+    target = evt.target;
+  }
   let message = '';
-  const target = evt.target as Element;
-  const value = evt.target.value as string;
   if (target.id === 'first_name' || target.id === 'second_name') {
     if (!value.match(/^[A-ZА-Я]/g)) {
       message = 'С заглавной';

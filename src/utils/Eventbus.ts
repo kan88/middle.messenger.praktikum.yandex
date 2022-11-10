@@ -1,31 +1,29 @@
-import { typeDict } from "./types";
+import { TypeDict } from './types';
 
 export default class EventBus {
+  _listeners: TypeDict<Array<Function>> = {};
 
-    _listeners: typeDict<Array<Function>> = {};
+  on(event: string, callback: Function): void {
+    if (!this._listeners[event]) this._listeners[event] = [];
 
-    on(event: string, callback: Function): void {
-        if (!this._listeners[event])
-            this._listeners[event] = [];
+    this._listeners[event].push(callback);
+  }
 
-        this._listeners[event].push(callback);
+  emit(event: string, ...args: ({} | undefined)[]): void {
+    if (!this._listeners[event]) {
+      return;
     }
 
-    emit(event: string, ...args: ({} | undefined)[]): void {
-        if (!this._listeners[event]) {
-            return;
-        }
+    this._listeners[event].forEach((callback) => {
+      callback(...args);
+    });
+  }
 
-        this._listeners[event].forEach(callback => {
-            callback(...args);
-        });
+  off(event: string, callback: Function): void {
+    if (!this._listeners[event]) {
+      return;
     }
 
-    off(event: string, callback: any): void {
-        if (!this._listeners[event]) {
-            return;
-        }
-
-        this._listeners[event] = this._listeners[event].filter((item => item !== callback));
-    }
+    this._listeners[event] = this._listeners[event].filter(((item) => item !== callback));
+  }
 }

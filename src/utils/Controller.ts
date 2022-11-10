@@ -8,25 +8,25 @@ const Controller = {
   //     console.log((item as HTMLInputElement).value)
   //   })
   // },
-  onValidate(evt: any): any {
+  onValidate(evt: Event): any {
     evt.preventDefault();
     if (isValid(evt)) {
-      View.showError(isValid(evt));
+      View.showError(evt, isValid(evt));
     } else {
-      View.hideError();
+      View.hideError(evt);
     }
   },
-  onSubmit(evt: any): void {
+  onSubmit(evt: Event): void {
     evt.preventDefault();
     const inputs = document.querySelectorAll('INPUT');
     inputs.forEach((input) => {
       if (isSubmit(input)) {
-        View.showError(isValid(evt));
+        View.showError(input, isValid(input));
         return;
       }
       console.log(input.value);
     });
   },
 };
-
-export default Controller;
+export const validationHandler = (evt: Event) => Controller.onValidate(evt);
+export const submitHandler = (evt: Event) => Controller.onSubmit(evt);

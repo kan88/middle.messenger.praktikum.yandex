@@ -1,4 +1,4 @@
-import Block from "./block";
+import Block from './block';
 
 export default function renderDOM(query: string, block: Block): Element | null {
   const root: Element | null = document.querySelector(query);

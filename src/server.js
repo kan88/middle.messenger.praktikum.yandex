@@ -10,4 +10,6 @@ app.get('/', (req, res) => {
 
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Сервер запущен...  http://localhost:${PORT}/`);
+});

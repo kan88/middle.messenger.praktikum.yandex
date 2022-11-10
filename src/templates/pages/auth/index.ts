@@ -2,7 +2,7 @@ import Inputs from '/src/templates/components/inputs/inputs';
 import Links from '/src/templates/components/links/links';
 import Auth from './auth';
 import renderDom from '../../../utils/renderDom';
-import Controller from '../../../utils/Controller';
+import { validationHandler, submitHandler } from '../../../utils/Controller';
 
 const inputs = new Inputs('div', {
   items: [{
@@ -24,8 +24,8 @@ const inputs = new Inputs('div', {
     class: 'auth__input-wrapper',
   },
   events: {
-    focusin: (evt: EventListenerOrEventListenerObject) => Controller.onValidate(evt),
-    focusout: (evt: EventListenerOrEventListenerObject) => Controller.onValidate(evt),
+    focusin: validationHandler,
+    focusout: validationHandler,
   },
 });
 
@@ -41,7 +41,7 @@ const links = new Links('div', {
   }],
   attr: {
     class: 'auth__btn-wrapper',
-  }
+  },
 });
 
 const form = new Auth('form', {
@@ -50,6 +50,9 @@ const form = new Auth('form', {
   links,
   attr: {
     class: 'form auth',
+  },
+  events: {
+    submit: submitHandler,
   },
 });
 

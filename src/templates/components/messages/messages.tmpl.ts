@@ -14,5 +14,4 @@ const template: string = `
   </div>
 </div>`;
 
-
 export default template;

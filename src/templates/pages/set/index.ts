@@ -2,7 +2,7 @@ import Set from './set';
 import renderDom from '../../../utils/renderDom';
 import Buttons from '../../components/buttons/buttons';
 import Inputs from '../../components/inputs/inputs';
-import Controller from '../../../utils/Controller';
+import { validationHandler, submitHandler } from '../../../utils/Controller';
 
 const inputs = new Inputs('div', {
   items: [{
@@ -74,8 +74,8 @@ const inputs = new Inputs('div', {
     class: 'set__input-wrapper',
   },
   events: {
-    focusin: (evt) => Controller.onValidate(evt),
-    focusout: (evt) => Controller.onValidate(evt),
+    focusin: validationHandler,
+    focusout: validationHandler,
   },
 });
 
@@ -98,7 +98,7 @@ const set = new Set('form', {
     class: 'form set',
   },
   events: {
-    submit: (evt) => Controller.onSubmit(evt),
+    submit: submitHandler,
   },
 });
 

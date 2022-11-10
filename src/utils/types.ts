@@ -1,18 +1,17 @@
 // generic types
 
-export type typeDict<T> = {
+export type TypeDict<T> = {
   [key: string | number]: T
 }
 
 // undefined types
-export type typeUndefined = typeDict<unknown>;
-
+export type typeUndefined = TypeDict<unknown>;
 
 // defined types
 export type typeDefined = {
-  "setting"?: typeDict<boolean | string>;
-  "attr"?: typeDict<string>;
-  "events"?: typeDict<EventListenerOrEventListenerObject>;
+  'setting'?: TypeDict<boolean | string>;
+  'attr'?: TypeDict<string>;
+  'events'?: TypeDict<EventListenerOrEventListenerObject>;
 };
 
 // mixed types

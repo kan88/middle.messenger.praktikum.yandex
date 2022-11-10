@@ -1,17 +1,19 @@
 const View = {
-  showError(message: string): void | null {
-    const root: Element | null = document.querySelector('.error');
-    if (!root) {
-      return null;
+  showError(evt: any, message: string): void | null {
+    if (evt instanceof Element) {
+      evt.nextSibling.textContent = message;
+      evt.nextSibling.style.color = 'red';
+    } else {
+      evt.target.nextSibling.textContent = message;
+      evt.nextSibling.style.color = 'red';
     }
-    root.textContent = message;
   },
-  hideError(): void | null {
-    const root: Element | null = document.querySelector('.error');
-    if (!root) {
-      return null;
+  hideError(evt: any): void | null {
+    if (evt instanceof Element) {
+      evt.nextSibling.textContent = '';
+    } else {
+      evt.target.nextSibling.textContent = '';
     }
-    root.textContent = '';
   },
 };
 

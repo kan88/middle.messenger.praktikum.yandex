@@ -2,7 +2,7 @@ import Reg from './reg';
 import renderDom from '../../../utils/renderDom';
 import Buttons from '../../components/buttons/buttons';
 import Inputs from '../../components/inputs/inputs';
-import Controller from '../../../utils/Controller';
+import { validationHandler, submitHandler } from '../../../utils/Controller';
 
 const inputs = new Inputs('div', {
   items: [{
@@ -52,8 +52,8 @@ const inputs = new Inputs('div', {
     class: 'reg__input-wrapper',
   },
   events: {
-    focusin: (evt) => Controller.onValidate(evt),
-    focusout: (evt) => Controller.onValidate(evt),
+    focusin: validationHandler,
+    focusout: validationHandler,
   },
 });
 
@@ -66,9 +66,7 @@ const buttons = new Buttons('div', {
   attr: {
     class: 'reg__btn-wrapper',
   },
-  events: {
-    submit: (evt) => Controller.onSubmit(evt),
-  },
+
 });
 
 const reg = new Reg('form', {
@@ -78,10 +76,9 @@ const reg = new Reg('form', {
     class: 'form reg',
   },
   events: {
-    submit: (evt) => Controller.onSubmit(evt),
+    submit: submitHandler,
   },
 
 });
 
 renderDom('.app', reg);
-

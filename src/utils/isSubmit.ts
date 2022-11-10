@@ -1,4 +1,4 @@
-export default function isSubmit(target: Element): string {
+export default function isSubmit(target: Event): string {
   let message = '';
   const value = target.value as string;
   if (target.id === 'first_name' || target.id === 'second_name') {
