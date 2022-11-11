@@ -13,7 +13,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
     FLOW_RENDER: 'flow:render',
   };
 
-  _props: typeMixed;
+  _props: TypeMixed;
 
   _children: TypeDict<Block>;
 
@@ -23,7 +23,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
 
   _element: HTMLElement;
 
-  _meta: { tag: string; props?: typeMixed; };
+  _meta: { tag: string; props?: TypeMixed; };
 
   _eventBus: EventBus;
 
@@ -41,7 +41,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
     this._eventBus.emit(Block.EVENTS.INIT);
   }
 
-  getChildren(propsAndChildren: typeMixed): { children: TypeDict<Block>; childrenArray: TypeDict<Block[]>; props: typeMixed; } {
+  getChildren(propsAndChildren: TypeMixed): { children: TypeDict<Block>; childrenArray: TypeDict<Block[]>; props: TypeMixed; } {
     const children: TypeDict<Block> = {};
     const childrenArray: TypeDict<Block[]> = {};
     const props: TypeMixed = {};
@@ -129,7 +129,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
     return true;
   }
 
-  setProps(newProps: typeMixed): void {
+  setProps(newProps: TypeMixed): void {
     if (!newProps) {
       return;
     }
@@ -167,13 +167,13 @@ export default abstract class Block<Props extends Record<string, any> = any> {
     return this._element;
   }
 
-  makePropsProxy(props: typeMixed) {
+  makePropsProxy(props: TypeMixed) {
     return new Proxy(props, {
-      get: (target: typeMixed, prop: string) => {
+      get: (target: TypeMixed, prop: string) => {
         const value = target[prop];
         return typeof (value) === 'function' ? value.bind(target) : value;
       },
-      set: (target: typeMixed, prop: string, value) => {
+      set: (target: TypeMixed, prop: string, value) => {
         const oldProp = { ...target };
         target[prop] = value;
         this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldProp, target);
@@ -200,7 +200,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
     this.getContent().style.display = 'none';
   }
 
-  compile(template: string, props?: typeMixed): DocumentFragment {
+  compile(template: string, props?: TypeMixed): DocumentFragment {
     if (typeof (props) === 'undefined') {
       props = this._props;
     }
