@@ -1,15 +1,16 @@
 .error {
-    margin: auto;
+  margin: auto;
+  min-height: 24px;
 }
 
 .error__title {
-    color: $denary;
-    font-size: 34px;
-    text-align: center;
+  color: $denary;
+  font-size: 34px;
+  text-align: center;
 }
 
 .error__link {
-    font-size: 20px;
-    color: $tertiary;
-    background-color: $denary;
+  font-size: 20px;
+  color: $tertiary;
+  background-color: $denary;
 }

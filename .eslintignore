@@ -1,4 +1,4 @@
-.parcel-cache
+/build
+**/*.min.js
 /node_modules
-/dist
 /src/index.ts
