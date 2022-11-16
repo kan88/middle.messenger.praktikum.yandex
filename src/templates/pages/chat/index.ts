@@ -53,4 +53,6 @@ const chat = new Chat('div', {
   },
 });
 
-renderDom('.app', chat);
+// renderDom('.app', chat);
+
+export default { chat };

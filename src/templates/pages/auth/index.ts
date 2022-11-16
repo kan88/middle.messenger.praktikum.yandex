@@ -1,8 +1,13 @@
 import Inputs from '/src/templates/components/inputs/inputs';
 import Links from '/src/templates/components/links/links';
 import Auth from './auth';
-import renderDom from '../../../utils/renderDom';
+// import renderDom from '../../../utils/renderDom';
 import { validationHandler, submitHandler } from '../../../utils/Controller';
+import Router from '../../../utils/Router';
+import chat from '../chat/index.ts';
+import reg from '../reg/index.ts';
+import set from '../set/index.ts';
+
 
 const inputs = new Inputs('div', {
   items: [{
@@ -31,7 +36,7 @@ const inputs = new Inputs('div', {
 
 const links = new Links('div', {
   items: [{
-    url: './templates/pages/chat/chat.html',
+    url: '/chat',
     title: 'Sign In',
     class: 'btn btn--sign',
   }, {
@@ -44,16 +49,26 @@ const links = new Links('div', {
   },
 });
 
-const form = new Auth('form', {
-  title: 'Authorization',
-  inputs,
-  links,
-  attr: {
-    class: 'form auth',
-  },
-  events: {
-    submit: submitHandler,
-  },
-});
+class Form extends Auth {
+  constructor() {
+    super('form', {
+      title: 'Authorization',
+      inputs,
+      links,
+      attr: {
+        class: 'form auth',
+      },
+      events: {
+        submit: submitHandler,
+      },
+    })
+  }
+};
 
-renderDom('.app', form);
+// renderDom('.app', form);
+
+const router = new Router('.app');
+
+router
+  .use('/', Form)
+  .start();

@@ -81,4 +81,5 @@ const reg = new Reg('form', {
 
 });
 
-renderDom('.app', reg);
+// renderDom('.app', reg);
+export default { reg };

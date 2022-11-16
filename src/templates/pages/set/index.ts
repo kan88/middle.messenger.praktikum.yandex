@@ -102,4 +102,6 @@ const set = new Set('form', {
   },
 });
 
-renderDom('.app', set);
+// renderDom('.app', set);
+
+export default { set };
