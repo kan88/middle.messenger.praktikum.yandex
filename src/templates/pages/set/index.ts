@@ -101,7 +101,7 @@ const buttons = new Buttons('div', {
 //     submit: submitHandler,
 //   },
 // });
-class SetPage extends Set {
+export default class SetPage extends Set {
   constructor() {
     super('form', {
       title: 'Settings',
@@ -117,5 +117,3 @@ class SetPage extends Set {
   }
 }
 // renderDom('.app', set);
-
-export default { SetPage };

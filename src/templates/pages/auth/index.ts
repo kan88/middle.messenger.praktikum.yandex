@@ -2,7 +2,7 @@ import Inputs from '/src/templates/components/inputs/inputs';
 import Links from '/src/templates/components/links/links';
 import Auth from './auth';
 // import renderDom from '../../../utils/renderDom';
-import { validationHandler, submitHandler } from '../../../utils/Controller';
+import { validationHandler, submitHandler, goHandler } from '../../../utils/Controller';
 import Router from '../../../utils/Router';
 import ChatPage from '../chat/index.ts';
 import RegPage from '../reg/index.ts';
@@ -35,16 +35,19 @@ const inputs = new Inputs('div', {
 
 const links = new Links('div', {
   items: [{
-    url: '/chat',
+    url: '*/chat',
     title: 'Sign In',
     class: 'btn btn--sign',
   }, {
-    url: '/reg',
+    url: '*/reg',
     title: 'Registration',
     class: 'btn btn__link btn__link--reg',
   }],
   attr: {
     class: 'auth__btn-wrapper',
+  },
+  events: {
+    click: goHandler,
   },
 });
 
@@ -70,7 +73,9 @@ const router = new Router('.app');
 
 router
   .use('/', Form)
-  .use('/chats', ChatPage)
+  .use('/chat', ChatPage)
   .use('/reg', RegPage)
   .use('/set', SetPage)
   .start();
+
+export default router;

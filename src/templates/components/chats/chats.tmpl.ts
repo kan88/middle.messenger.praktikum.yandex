@@ -12,8 +12,6 @@ const template: string = `
         </li>
       {{/each}}
     </ul>
-    <a class="chat__item chat__item--settings"
-    href="/set">Settings</a>
   </div>
 </div>`;
 
