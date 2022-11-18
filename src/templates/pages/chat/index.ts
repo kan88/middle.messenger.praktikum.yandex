@@ -45,14 +45,24 @@ const messages = new Messages('div', {
   },
 });
 
-const chat = new Chat('div', {
-  chats,
-  messages,
-  attr: {
-    class: 'main__chat',
-  },
-});
+// const chat = new Chat('div', {
+//   chats,
+//   messages,
+//   attr: {
+//     class: 'main__chat',
+//   },
+// });
 
-// renderDom('.app', chat);
+class ChatPage extends Chat {
+  constructor() {
+    super('div', {
+      chats,
+      messages,
+      attr: {
+        class: 'main__chat',
+      },
+    });
+  }
+}
 
-export default { chat };
+export default { ChatPage };

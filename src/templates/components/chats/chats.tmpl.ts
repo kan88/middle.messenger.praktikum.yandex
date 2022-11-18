@@ -13,7 +13,7 @@ const template: string = `
       {{/each}}
     </ul>
     <a class="chat__item chat__item--settings"
-    href="../set/set.html">Settings</a>
+    href="/set">Settings</a>
   </div>
 </div>`;
 

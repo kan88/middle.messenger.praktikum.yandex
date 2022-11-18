@@ -1,5 +1,5 @@
 import Set from './set';
-import renderDom from '../../../utils/renderDom';
+// import renderDom from '../../../utils/renderDom';
 import Buttons from '../../components/buttons/buttons';
 import Inputs from '../../components/inputs/inputs';
 import { validationHandler, submitHandler } from '../../../utils/Controller';
@@ -90,18 +90,32 @@ const buttons = new Buttons('div', {
   },
 });
 
-const set = new Set('form', {
-  title: 'Settings',
-  inputs,
-  buttons,
-  attr: {
-    class: 'form set',
-  },
-  events: {
-    submit: submitHandler,
-  },
-});
-
+// const set = new Set('form', {
+//   title: 'Settings',
+//   inputs,
+//   buttons,
+//   attr: {
+//     class: 'form set',
+//   },
+//   events: {
+//     submit: submitHandler,
+//   },
+// });
+class SetPage extends Set {
+  constructor() {
+    super('form', {
+      title: 'Settings',
+      inputs,
+      buttons,
+      attr: {
+        class: 'form set',
+      },
+      events: {
+        submit: submitHandler,
+      },
+    });
+  }
+}
 // renderDom('.app', set);
 
-export default { set };
+export default { SetPage };

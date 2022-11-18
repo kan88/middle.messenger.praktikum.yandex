@@ -69,17 +69,32 @@ const buttons = new Buttons('div', {
 
 });
 
-const reg = new Reg('form', {
-  inputs,
-  buttons,
-  attr: {
-    class: 'form reg',
-  },
-  events: {
-    submit: submitHandler,
-  },
+// const reg = new Reg('form', {
+//   inputs,
+//   buttons,
+//   attr: {
+//     class: 'form reg',
+//   },
+//   events: {
+//     submit: submitHandler,
+//   },
 
-});
+// });
+
+class RegPage extends Reg {
+  constructor() {
+    super('form', {
+      inputs,
+      buttons,
+      attr: {
+        class: 'form reg',
+      },
+      events: {
+        submit: submitHandler,
+      },
+    });
+  }
+}
 
 // renderDom('.app', reg);
-export default { reg };
+export default { RegPage };

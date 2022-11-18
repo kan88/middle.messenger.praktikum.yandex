@@ -4,10 +4,9 @@ import Auth from './auth';
 // import renderDom from '../../../utils/renderDom';
 import { validationHandler, submitHandler } from '../../../utils/Controller';
 import Router from '../../../utils/Router';
-import chat from '../chat/index.ts';
-import reg from '../reg/index.ts';
-import set from '../set/index.ts';
-
+import ChatPage from '../chat/index.ts';
+import RegPage from '../reg/index.ts';
+import SetPage from '../set/index.ts';
 
 const inputs = new Inputs('div', {
   items: [{
@@ -40,7 +39,7 @@ const links = new Links('div', {
     title: 'Sign In',
     class: 'btn btn--sign',
   }, {
-    url: './templates/pages/reg/reg.html',
+    url: '/reg',
     title: 'Registration',
     class: 'btn btn__link btn__link--reg',
   }],
@@ -61,9 +60,9 @@ class Form extends Auth {
       events: {
         submit: submitHandler,
       },
-    })
+    });
   }
-};
+}
 
 // renderDom('.app', form);
 
@@ -71,4 +70,7 @@ const router = new Router('.app');
 
 router
   .use('/', Form)
+  .use('/chats', ChatPage)
+  .use('/reg', RegPage)
+  .use('/set', SetPage)
   .start();
