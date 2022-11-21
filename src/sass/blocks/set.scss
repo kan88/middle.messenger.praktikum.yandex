@@ -1,7 +1,18 @@
+.set {
+  min-height: 50px;
+}
+
+.set__link {
+  display: block;
+  color: $denary;
+  text-decoration: none;
+  background-color: $secondary;
+}
+
 .set__input-wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 60%;
+  max-width: 40%;
   margin: 0 auto;
 }
 

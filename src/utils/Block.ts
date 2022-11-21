@@ -197,7 +197,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
 
   hide(): void {
     console.log('Block-hide');
-    this.getContent().style.display = 'none';
+    this.getContent().remove();
   }
 
   compile(template: string, props?: TypeMixed): DocumentFragment {

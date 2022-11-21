@@ -23,7 +23,7 @@ export default class Router {
   start() {
     window.onpopstate = (event => {
 
-      //console.log(11111)
+      console.log(11111)
       this._onRoute(event.currentTarget.location.pathname)
     }).bind(this);
 

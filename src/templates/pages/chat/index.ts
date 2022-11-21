@@ -49,12 +49,12 @@ const messages = new Messages('div', {
 
 const link = new Links('div', {
   items: [{
-    url: '*/set',
+    url: '*/settings',
     title: 'Settings',
-    class: 'chat__item chat__item--settings',
+    class: 'set__link',
   }],
   attr: {
-    class: 'auth__btn-wrapper',
+    class: 'set',
   },
   events: {
     click: goHandler,

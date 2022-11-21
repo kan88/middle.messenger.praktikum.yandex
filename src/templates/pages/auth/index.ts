@@ -35,11 +35,11 @@ const inputs = new Inputs('div', {
 
 const links = new Links('div', {
   items: [{
-    url: '*/chat',
+    url: '*/messenger',
     title: 'Sign In',
     class: 'btn btn--sign',
   }, {
-    url: '*/reg',
+    url: '*/sign-up',
     title: 'Registration',
     class: 'btn btn__link btn__link--reg',
   }],
@@ -73,9 +73,17 @@ const router = new Router('.app');
 
 router
   .use('/', Form)
-  .use('/chat', ChatPage)
-  .use('/reg', RegPage)
-  .use('/set', SetPage)
+  .use('/messenger', ChatPage)
+  .use('/sign-up', RegPage)
+  .use('/settings', SetPage)
   .start();
 
 export default router;
+window.addEventListener('DOMContentLoaded', () => {
+  router
+    .use('/', Form)
+    .use('/messenger', ChatPage)
+    .use('/sign-up', RegPage)
+    .use('/settings', SetPage)
+    .start();
+});

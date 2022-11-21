@@ -33,7 +33,7 @@ export default class Route {
       return;
     }
 
-    this._block.show();
+    renderDOM(this._props.rootQuery, this._block);
   }
 }
 

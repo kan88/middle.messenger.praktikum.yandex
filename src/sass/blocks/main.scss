@@ -1,4 +1,10 @@
 .main__chat {
+  width: 100%;
   display: flex;
   flex-direction: row;
+}
+
+.main__chat-wrapper {
+  display: inline-block;
+  width: 30%;
 }

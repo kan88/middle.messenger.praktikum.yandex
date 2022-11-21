@@ -1,8 +1,9 @@
 const template: string = `
+<div class='main__chat-wrapper'>
 {{{link}}}
 {{{chats}}}
+</div>
 {{{messages}}}
-<div class="error"></div>
 `;
 
 export default template;
