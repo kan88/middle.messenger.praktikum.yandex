@@ -1,5 +1,5 @@
-import EventBus from "./Eventbus";
-import set from "./set"
+import EventBus from './Eventbus';
+import set from './set';
 
 export enum StoreEvents {
   Updated = 'updated',
@@ -22,8 +22,48 @@ export default class Store extends EventBus {
 
 const store = new Store();
 
-export default store
+store.set('chat', {
+  items: [{
+    class: 'chat__item--actual',
+    name: 'Harry',
+    date: '12.10.22 08:30',
+    message: 'Hi there',
+  }, {
+    class: 'chat__item--actual',
+    name: 'Harry',
+    date: '12.10.22 08:30',
+    message: 'Hi there',
+  }, {
+    class: 'chat__item--actual',
+    name: 'Harry',
+    date: '12.10.22 08:30',
+    message: 'Hi there',
+  }],
+  attr: {
+    class: 'chat',
+  },
+});
 
+store.set('messages', {
+  items: [{
+    date: '12.10.22 08:30',
+    text: 'Hi there',
+    class: 'messages__item--user',
+  }, {
+    date: '12.10.22 08:30',
+    text: 'Hi',
+    class: 'messages__item--opponent',
+  }, {
+    date: '12.10.22 08:30',
+    text: 'How are you',
+    class: 'messages__item--user',
+  },
+  ],
+  attr: {
+    class: 'messages',
+  },
+});
 
+export default store;
 // set(state, 'user.name', 'John');
 // console.log(state); // { user: { name: 'John' } }
