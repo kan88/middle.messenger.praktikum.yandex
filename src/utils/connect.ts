@@ -9,7 +9,7 @@ function connect(mapStateToProps: (state: Indexed) => Indexed) {
         // сохраняем начальное состояние
         let state = mapStateToProps(store.getState());
 
-        super({ ...props, ...state });
+        super('div', { ...props, ...state });
 
         // подписываемся на событие
         store.on(StoreEvents.Updated, () => {

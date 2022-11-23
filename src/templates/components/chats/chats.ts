@@ -13,6 +13,5 @@ export default class Chats extends Block {
 const chatsWithStore = connect((state) => ({
   chats: state.messages,
 }))
-
 export default chatsWithStore(Chats)
 // export default Chats
