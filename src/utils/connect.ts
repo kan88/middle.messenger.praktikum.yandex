@@ -8,14 +8,14 @@ function connect(mapStateToProps: (state: Indexed) => Indexed) {
       constructor(props) {
         // сохраняем начальное состояние
         let state = mapStateToProps(store.getState());
-
+        console.log(state)
         super('div', { ...props, ...state });
 
         // подписываемся на событие
         store.on(StoreEvents.Updated, () => {
           // при обновлении получаем новое состояние
           const newState = mapStateToProps(store.getState());
-
+          console.log(newState)
           // если что-то из используемых данных поменялось, обновляем компонент
           if (!isEqual(state, newState)) {
             this.setProps({ ...newState });

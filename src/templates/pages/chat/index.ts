@@ -5,7 +5,7 @@ import Chat from './chat';
 import renderDom from '../../../utils/renderDom';
 import { goHandler } from '../../../utils/Controller';
 
-const chats = new Chats('div', {
+const chats = new Chats({
   items: [{
     class: 'chat__item--actual',
     name: 'Harry',
@@ -26,8 +26,7 @@ const chats = new Chats('div', {
     class: 'chat',
   },
 });
-
-const messages = new Messages('div', {
+const messages = new Messages({
   items: [{
     date: '12.10.22 08:30',
     text: 'Hi there',
@@ -60,13 +59,6 @@ const link = new Links('div', {
     click: goHandler,
   },
 });
-// const chat = new Chat('div', {
-//   chats,
-//   messages,
-//   attr: {
-//     class: 'main__chat',
-//   },
-// });
 
 export default class ChatPage extends Chat {
   constructor() {
