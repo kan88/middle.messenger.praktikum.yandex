@@ -25,7 +25,7 @@ const Controller = {
         View.showError(input, isValid(input));
         return;
       }
-      console.log(input.value);
+      return true;
     });
   },
   onGo(evt: Event): void {

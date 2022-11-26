@@ -3,6 +3,7 @@ import renderDom from '../../../utils/renderDom';
 import Buttons from '../../components/buttons/buttons';
 import Inputs from '../../components/inputs/inputs';
 import { validationHandler, submitHandler } from '../../../utils/Controller';
+import controller from '../../../utils/api/regController';
 
 const inputs = new Inputs('div', {
   items: [{
@@ -90,7 +91,17 @@ export default class RegPage extends Reg {
         class: 'form reg',
       },
       events: {
-        submit: submitHandler,
+        submit: (evt) => {
+          evt.preventDefault()
+          // console.log(document.querySelector('form'))
+          const data = new FormData(document.querySelector('form'))
+          let object = {};
+          data.forEach((value, key) => object[key] = value);
+          // let json = JSON.stringify(object);
+          if (submitHandler) {
+            controller.create(object)
+          }
+        }
       },
     });
   }

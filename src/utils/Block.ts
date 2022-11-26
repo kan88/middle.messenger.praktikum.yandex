@@ -196,7 +196,6 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   hide(): void {
-    console.log('Block-hide');
     this.getContent().remove();
   }
 

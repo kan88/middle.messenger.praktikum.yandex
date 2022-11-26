@@ -8,7 +8,6 @@ function connect(mapStateToProps: (state: Indexed) => Indexed) {
       constructor(props) {
         // сохраняем начальное состояние
         let state = mapStateToProps(store.getState());
-        console.log(state)
         super('div', { ...props, ...state });
 
         // подписываемся на событие

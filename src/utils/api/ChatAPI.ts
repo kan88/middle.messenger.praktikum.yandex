@@ -1,4 +1,4 @@
-import HTTPTransport from './http';
+import HTTPTransport from '../http';
 import { BaseAPI } from './BaseAPI';
 
 class ChatAPI extends BaseAPI {

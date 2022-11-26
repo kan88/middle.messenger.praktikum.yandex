@@ -1,82 +1,84 @@
 enum METHODS {
-	GET = 'GET',
-	POST = 'POST',
-	DELETE = 'DELETE',
-	PUT = 'PUT',
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
+}
+
+export type RequestOptions = {
+  headers?: Record<string, string>;
+  method: string;
+  timeout?: number;
+  data?: any;
+};
+
+const baseUrl = 'https://ya-praktikum.tech/api/v2';
+
+export class HTTPTransport {
+  async get<TResponse>(url: string, data?: {}): Promise<TResponse> {
+    return this.request(url, { method: METHODS.GET, data });
   }
 
-  type TOptions = {
-	method: METHODS;
-	data?: Record<string, string | number>;
-	headers?: Record<string, string>;
-	timeout?: number;
-  };
-
-  type TOptionsWithoutMethod = Omit<TOptions, 'method'>;
-
-  type HTTPMethod = (
-	url: string,
-	options?: TOptionsWithoutMethod
-  ) => Promise<unknown>;
-
-class HTTPTransport {
-  get: HTTPMethod = (url, options = {}) => {
-	  let getParams = '';
-	  if (options.data) {
-      getParams = this.queryStringify(options.data);
-	  }
-
-	  return this.request(
-      url + getParams,
-      { ...options, method: METHODS.GET },
-      options.timeout,
-	  );
-  };
-
-  put: HTTPMethod = (url, options = {}) => this.request(
-    url,
-    { ...options, method: METHODS.PUT },
-    options.timeout,
-	  );
-
-  post: HTTPMethod = (url, options = {}) => this.request(
-    url,
-    { ...options, method: METHODS.POST },
-    options.timeout,
-	  );
-
-  delete: HTTPMethod = (url, options = {}) => this.request(
-    url,
-    { ...options, method: METHODS.DELETE },
-    options.timeout,
-	  );
-
-  private queryStringify<T>(data: Record<string, T>): string {
-	  return Object.keys(data)
-      .map((key, index) => (index == 0 ? `?${key}=${data[key]}` : `&${key}=${data[key]}`))
-      .join('');
+  async post<TResponse>(url: string, data: {}): Promise<TResponse> {
+    return this.request(url, { method: METHODS.POST, data });
   }
 
-  request = (url: string, options: TOptions, timeout = 5000) => {
-	  const { method, data, headers } = options;
+  async put<TResponse>(url: string, data: {}): Promise<TResponse> {
+    return this.request(url, { method: METHODS.PUT, data });
+  }
 
-	  return new Promise((resolve, reject) => {
+  async delete<TResponse>(url: string, data: {}): Promise<TResponse> {
+    return this.request(url, { method: METHODS.DELETE, data });
+  }
+
+  async request<TResponse>(
+    url: string,
+    options: RequestOptions = { method: METHODS.GET },
+  ): Promise<TResponse> {
+    return new Promise((resolve, reject) => {
+      const { method, data } = options;
+
       const xhr = new XMLHttpRequest();
-      xhr.open(options.method, url);
-      xhr.onload = () => resolve(xhr);
-      xhr.timeout = timeout;
 
-      if (headers) {
-		  Object.keys(headers).forEach((key: string) => xhr.setRequestHeader(key, headers[key]));
+      if (method === METHODS.GET) {
+        if (data) {
+          url = `${url}?${Object.entries(data)
+            .map(([key, value]: [key: string, value: any]): string => `${key}=${value}`)
+            .join('&')}`;
+        }
       }
+
+      xhr.open(method, baseUrl + url);
+      xhr.withCredentials = true;
+
+      xhr.onload = function () {
+        let resp;
+        if (~xhr?.getResponseHeader('Content-Type')?.indexOf('application/json')!) {
+          resp = JSON.parse(xhr.response);
+        } else {
+          resp = xhr.response;
+        }
+        if (xhr.status === 200) {
+          resolve(resp);
+        } else {
+          reject(resp);
+        }
+      };
 
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
-
-      method === 'GET' ? xhr.send() : xhr.send(JSON.stringify(data));
-	  });
-  };
+      if (method === METHODS.GET || !data) {
+        xhr.send();
+      } else if (data instanceof FormData) {
+        xhr.send(data);
+      } else {
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        xhr.send(JSON.stringify(data));
+      }
+    });
+  }
 }
 
-export { HTTPTransport };
+export default HTTPTransport
