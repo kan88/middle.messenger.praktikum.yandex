@@ -3,7 +3,7 @@ import renderDom from '../../../utils/renderDom';
 import Buttons from '../../components/buttons/buttons';
 import Inputs from '../../components/inputs/inputs';
 import { validationHandler, submitHandler } from '../../../utils/Controller';
-import controller from '../../../utils/api/regController';
+import controller from '../../../utils/api/RegController';
 
 const inputs = new Inputs('div', {
   items: [{

@@ -1,4 +1,5 @@
 import HTTPTransport from '../http';
+import { BaseAPI } from './BaseAPI';
 
 type TRegData = {
   login: string;
@@ -7,7 +8,7 @@ type TRegData = {
 
 const route = new HTTPTransport();
 
-class ChatAPI {
+class AuthAPI {
   protected http: HTTPTransport;
 
   constructor() {
@@ -15,17 +16,8 @@ class ChatAPI {
   }
 
   create(data: TRegData): void {
-    return this.http.post('/chats', data)
+    return this.http.post('/auth/signin', data)
   }
-
-  logout(): void {
-    return this.http.post('/chats')
-  }
-
-  getchats(): void {
-    return this.http.get('/chats')
-  }
-
 }
 
-export { ChatAPI }
+export { AuthAPI }

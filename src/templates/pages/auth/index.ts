@@ -7,6 +7,9 @@ import Router from '../../../utils/Router';
 import ChatPage from '../chat/index.ts';
 import RegPage from '../reg/index.ts';
 import SetPage from '../set/index.ts';
+import controller from '../../../utils/api/AuthController';
+import Buttons from '../../components/buttons/buttons';
+
 
 const inputs = new Inputs('div', {
   items: [{
@@ -33,12 +36,20 @@ const inputs = new Inputs('div', {
   },
 });
 
+const buttons = new Buttons('div', {
+  items: [{
+    type: 'submit',
+    class: 'btn btn__link btn__link--submit',
+    title: 'Sign In',
+  }],
+  attr: {
+    class: 'auth__btn-wrapper',
+  },
+
+});
+
 const links = new Links('div', {
   items: [{
-    url: '*/messenger',
-    title: 'Sign In',
-    class: 'btn btn--sign',
-  }, {
     url: '*/sign-up',
     title: 'Registration',
     class: 'btn btn__link btn__link--reg',
@@ -56,12 +67,23 @@ class Form extends Auth {
     super('form', {
       title: 'Authorization',
       inputs,
+      buttons,
       links,
       attr: {
         class: 'form auth',
       },
       events: {
-        submit: submitHandler,
+        submit: (evt) => {
+          evt.preventDefault()
+          // console.log(document.querySelector('form'))
+          const data = new FormData(document.querySelector('form'))
+          let object = {};
+          data.forEach((value, key) => object[key] = value);
+          // let json = JSON.stringify(object);
+          if (submitHandler) {
+            controller.create(object)
+          }
+        }
       },
     });
   }
