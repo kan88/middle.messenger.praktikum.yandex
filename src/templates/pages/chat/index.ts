@@ -6,47 +6,12 @@ import renderDom from '../../../utils/renderDom';
 import { goHandler } from '../../../utils/Controller';
 import Buttons from '../../components/buttons/buttons';
 import controller from '../../../utils/api/ChatController';
+import store from '../../../utils/Store';
 
-const chats = new Chats({
-  items: [{
-    class: 'chat__item--actual',
-    name: 'Harry',
-    date: '12.10.22 08:30',
-    message: 'Hi there',
-  }, {
-    class: 'chat__item--actual',
-    name: 'Harry',
-    date: '12.10.22 08:30',
-    message: 'Hi there',
-  }, {
-    class: 'chat__item--actual',
-    name: 'Harry',
-    date: '12.10.22 08:30',
-    message: 'Hi there',
-  }],
-  attr: {
-    class: 'chat',
-  },
-});
-const messages = new Messages({
-  items: [{
-    date: '12.10.22 08:30',
-    text: 'Hi there',
-    class: 'messages__item--user',
-  }, {
-    date: '12.10.22 08:30',
-    text: 'Hi',
-    class: 'messages__item--opponent',
-  }, {
-    date: '12.10.22 08:30',
-    text: 'How are you',
-    class: 'messages__item--user',
-  },
-  ],
-  attr: {
-    class: 'messages',
-  },
-});
+console.log()
+
+const chats = new Chats(store.getState().chat);
+const messages = new Messages(store.getState().messages);
 
 const settings = new Links('div', {
   items: [{

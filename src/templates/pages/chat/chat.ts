@@ -9,12 +9,4 @@ class Chat extends Block {
   }
 }
 
-function mapUserToProps() {
-  return null
-}
-const ChatWithStore = connect(mapUserToProps)
-//store.getState()
-
-
-// export default ChatWithStore(Chat)
 export default Chat
