@@ -18,6 +18,14 @@ class ChatAPI {
     return this.http.post('/chats', data)
   }
 
+  addUser(data: TRegData): void {
+    return this.http.put('/chats/users', data)
+  }
+
+  removeUser(data: TRegData): void {
+    return this.http.delete('/chats/users', data)
+  }
+
   logout(): void {
     return this.http.post('/chats')
   }

@@ -22,27 +22,7 @@ export default class Store extends EventBus {
 
 const store = new Store();
 
-store.set('chat', {
-  items: [{
-    class: 'chat__item--actual',
-    name: 'Harry',
-    date: '12.10.22 08:30',
-    message: 'Hi there',
-  }, {
-    class: 'chat__item--actual',
-    name: 'Harry',
-    date: '12.10.22 08:30',
-    message: 'Hi there',
-  }, {
-    class: 'chat__item--actual',
-    name: 'Harry',
-    date: '12.10.22 08:30',
-    message: 'Hi there',
-  }],
-  attr: {
-    class: 'chat',
-  },
-});
+
 
 store.set('messages', {
   items: [{

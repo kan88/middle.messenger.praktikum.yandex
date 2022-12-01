@@ -16,12 +16,21 @@ class ChatController {
     await this.api.create(data);
   }
 
+  async addUser(data: any) {
+    await this.api.addUser(data);
+  }
+
+  async removeUser(data: any) {
+    await this.api.removeUser(data);
+  }
+
   async logout() {
     await this.api.logout();
   }
 
   async getchats() {
-    await this.api.getchats()
+    const response = await this.api.getchats()
+    return response
   }
 
 

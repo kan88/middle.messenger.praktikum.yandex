@@ -7,9 +7,44 @@ import { goHandler } from '../../../utils/Controller';
 import Buttons from '../../components/buttons/buttons';
 import controller from '../../../utils/api/ChatController';
 import store from '../../../utils/Store';
+import Form from '../../components/form/form';
+import Modal from '../../components/modal/modal';
 
-console.log()
+//записываем в стор список чатов
+// console.log(controller.getchats());
 
+store.set('chat', {
+  items: await controller.getchats(),
+  attr: {
+    class: 'chat',
+  },
+  events: {
+    click: (evt) => {
+      if (evt.target.classList.contains('plus')) {
+        document.querySelector('.modal').classList.remove('modal--nodisplay')
+        document.querySelector('.modal__input--chatid').value = evt.target.parentElement.dataset.id
+        document.querySelector('.modal__reset').addEventListener('click', (evt) => {
+          evt.preventDefault();
+          document.querySelector('.modal').classList.add('modal--nodisplay')
+          document.querySelector('.modal').classList.remove('modal--display')
+        })
+        document.querySelector('.modal__remove').addEventListener('click', (evt) => {
+          evt.preventDefault();
+          const user = document.querySelector('.modal__input--userid').value
+          const chat = document.querySelector('.modal__input--chatid').value
+          const object = {
+            "users": [user],
+            "chatId": chat
+          };
+          // let json = JSON.stringify(object);
+          controller.removeUser(object);
+        })
+      }
+    }
+  }
+});
+
+// console.log(store.getState())
 const chats = new Chats(store.getState().chat);
 const messages = new Messages(store.getState().messages);
 
@@ -46,59 +81,56 @@ const logout = new Buttons('div', {
   },
 });
 
-const getChats = new Buttons('div', {
-  items: [{
-    type: 'button',
-    class: 'set__link',
-    title: 'getchats',
-  }],
+const form = new Form('form', {
   attr: {
-    class: 'getchats',
-  },
-  events: {
-    click: (evt) => {
-      evt.preventDefault();
-      // console.log(document.querySelector('form'))
-      // let json = JSON.stringify(object);
-      controller.getchats().then((response) => response.json()).then((data) => console.log(data));
-    },
-  },
-});
-
-const newChat = new Buttons('div', {
-  items: [{
-    type: 'submit',
-    class: 'set__link',
-    title: 'newchat',
-  }],
-  attr: {
-    class: 'newchat',
+    class: 'main__chat-form',
+    method: 'post',
   },
   events: {
     submit: (evt) => {
       evt.preventDefault();
-      // console.log(document.querySelector('form'))
+      console.log(evt)
       const data = new FormData(document.querySelector('.main__chat-form'));
       const object = {};
       data.forEach((value, key) => object[key] = value);
       // let json = JSON.stringify(object);
-      controller.create(object).then((response) => response.json()).then((data) => console.log(data));
+      controller.create(object);
     },
   },
 });
+
+const modalAdd = new Modal('form', {
+  attr: {
+    class: 'modal',
+    method: 'post'
+  },
+  events: {
+    submit: (evt) => {
+      evt.preventDefault();
+      // const data = new FormData(evt.target);
+      const user = document.querySelector('.modal__input--userid').value
+      const chat = document.querySelector('.modal__input--chatid').value
+      const object = {
+        "users": [user],
+        "chatId": chat
+      };
+      controller.addUser(object);
+    }
+  },
+})
 
 export default class ChatPage extends Chat {
   constructor() {
     super('div', {
       logout,
       settings,
-      newChat,
+      form,
       chats,
-      getChats,
       messages,
       attr: {
         class: 'main__chat',
       },
+      modalAdd
     });
   }
 }

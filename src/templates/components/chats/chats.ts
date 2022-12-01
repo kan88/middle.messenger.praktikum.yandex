@@ -10,9 +10,7 @@ class Chats extends Block {
   }
 }
 
-const chatsWithStore = connect((state) => ({
-  chats: state.chat,
-}))
+const chatsWithStore = connect((state) => (state.chat))
 
 export default chatsWithStore(Chats)
 // export default Chats

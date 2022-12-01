@@ -75,7 +75,7 @@ class Form extends Auth {
       events: {
         submit: (evt) => {
           evt.preventDefault()
-          // console.log(document.querySelector('form'))
+          console.log(evt)
           const data = new FormData(document.querySelector('form'))
           let object = {};
           data.forEach((value, key) => object[key] = value);
@@ -101,6 +101,7 @@ router
   .start();
 
 export default router;
+
 window.addEventListener('DOMContentLoaded', () => {
   router
     .use('/', Form)
