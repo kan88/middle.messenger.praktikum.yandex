@@ -4,6 +4,8 @@ import EventBus from './Eventbus';
 import { TypeDict, TypeMixed } from './types';
 import isBlock from '../utils/isBlock';
 import isBlockArray from '../utils/isBlockArray';
+import isEqual from './isEqual';
+import { cloneDeep } from './cloneDeep';
 
 export default abstract class Block<Props extends Record<string, any> = any> {
   static EVENTS: TypeDict<string> = {
@@ -117,6 +119,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   _componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): void {
+    console.log('here render')
     const isReRender: boolean = this.componentDidUpdate(oldProps, newProps);
     if (isReRender) {
       this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
@@ -124,9 +127,12 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): boolean {
-    console.log(newProps, oldProps);
-
-    return true;
+    console.log(oldProps, newProps)
+    // console.log(isEqual(oldProps, newProps))
+    if (!isEqual(oldProps, newProps)) {
+      this._props = newProps
+      return true
+    };
   }
 
   setProps(newProps: TypeMixed): void {
@@ -174,9 +180,13 @@ export default abstract class Block<Props extends Record<string, any> = any> {
         return typeof (value) === 'function' ? value.bind(target) : value;
       },
       set: (target: TypeMixed, prop: string, value) => {
-        const oldProp = { ...target };
-        target[prop] = value;
-        this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldProp, target);
+        const oldTarget = cloneDeep(target);
+        // target[prop as string] = value;
+
+        target = value;
+        console.log(oldTarget)
+        console.log(target)
+        this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
     });

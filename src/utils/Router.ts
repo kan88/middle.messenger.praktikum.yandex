@@ -7,6 +7,7 @@ export default class Router {
     }
 
     this.routes = [];
+    this.pathes = [];
     this.history = window.history;
     this._currentRoute = null;
     this._rootQuery = rootQuery;
@@ -14,10 +15,14 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname, block) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
-    this.routes.push(route);
-    return this;
+  use(pathname, block, state) {
+    if (!state) {
+      const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+      // console.log(rootQuery)
+      this.routes.push(route);
+      this.routes.push(route);
+      return this;
+    }
   }
 
   start() {

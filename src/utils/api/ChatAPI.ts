@@ -27,7 +27,7 @@ class ChatAPI {
   }
 
   logout(): void {
-    return this.http.post('/chats')
+    return this.http.post('/auth/logout')
   }
 
   getchats(): void {

@@ -3,6 +3,13 @@ import Set from './set';
 import Buttons from '../../components/buttons/buttons';
 import Inputs from '../../components/inputs/inputs';
 import { validationHandler, submitHandler } from '../../../utils/Controller';
+import store from '../../../utils/Store';
+
+console.log('set')
+
+export const addUserToStore = async (data) => {
+  store.set('user', data)
+}
 
 const inputs = new Inputs('div', {
   items: [{

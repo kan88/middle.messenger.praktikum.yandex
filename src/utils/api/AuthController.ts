@@ -11,6 +11,9 @@ class AuthController {
   //   const formData = new FormData(evt)
   //   const Registration = new RegAPI(formData)
   // }
+  async user() {
+    await this.api.user();
+  }
 
   async create(data: any) {
     await this.api.create(data);

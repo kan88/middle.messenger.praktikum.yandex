@@ -20,8 +20,14 @@ export default class Store extends EventBus {
   }
 }
 
+console.log('store module')
 const store = new Store();
-
+// store.set('chats', {
+//   items: {
+//     id: 1000,
+//     title: 'No Chats'
+//   }
+// })
 
 
 store.set('messages', {

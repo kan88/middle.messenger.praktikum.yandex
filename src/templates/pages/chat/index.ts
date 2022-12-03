@@ -9,44 +9,44 @@ import controller from '../../../utils/api/ChatController';
 import store from '../../../utils/Store';
 import Form from '../../components/form/form';
 import Modal from '../../components/modal/modal';
+import router from '../auth';
 
 //записываем в стор список чатов
-// console.log(controller.getchats());
-
-store.set('chat', {
-  items: await controller.getchats(),
-  attr: {
-    class: 'chat',
-  },
-  events: {
-    click: (evt) => {
-      if (evt.target.classList.contains('plus')) {
-        document.querySelector('.modal').classList.remove('modal--nodisplay')
-        document.querySelector('.modal__input--chatid').value = evt.target.parentElement.dataset.id
-        document.querySelector('.modal__reset').addEventListener('click', (evt) => {
-          evt.preventDefault();
-          document.querySelector('.modal').classList.add('modal--nodisplay')
-          document.querySelector('.modal').classList.remove('modal--display')
-        })
-        document.querySelector('.modal__remove').addEventListener('click', (evt) => {
-          evt.preventDefault();
-          const user = document.querySelector('.modal__input--userid').value
-          const chat = document.querySelector('.modal__input--chatid').value
-          const object = {
-            "users": [user],
-            "chatId": chat
-          };
-          // let json = JSON.stringify(object);
-          controller.removeUser(object);
-        })
+export const addChatsToStore = async () => {
+  store.set('chats', {
+    items: await controller.getchats(),
+    attr: {
+      class: 'chat',
+    },
+    events: {
+      click: (evt) => {
+        if (evt.target.classList.contains('plus')) {
+          document.querySelector('.modal').classList.remove('modal--nodisplay')
+          document.querySelector('.modal__input--chatid').value = evt.target.parentElement.dataset.id
+          document.querySelector('.modal__reset').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            document.querySelector('.modal').classList.add('modal--nodisplay')
+            document.querySelector('.modal').classList.remove('modal--display')
+          })
+          document.querySelector('.modal__remove').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            const user = document.querySelector('.modal__input--userid').value
+            const chat = document.querySelector('.modal__input--chatid').value
+            const object = {
+              "users": [user],
+              "chatId": chat
+            };
+            // let json = JSON.stringify(object);
+            controller.removeUser(object);
+          })
+        }
       }
     }
-  }
-});
+  });
+}
 
-// console.log(store.getState())
-const chats = new Chats(store.getState().chat);
-const messages = new Messages(store.getState().messages);
+const chats = new Chats({});
+const messages = new Messages({});
 
 const settings = new Links('div', {
   items: [{
@@ -76,7 +76,9 @@ const logout = new Buttons('div', {
       evt.preventDefault();
       // console.log(document.querySelector('form'))
       // let json = JSON.stringify(object);
-      controller.logout();
+      controller.logout()
+        .then(() => router.go('/'))
+
     },
   },
 });
