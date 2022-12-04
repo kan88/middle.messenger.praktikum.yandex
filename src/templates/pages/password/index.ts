@@ -9,6 +9,13 @@ import controller from '../../../utils/api/UserController';
 
 const inputs = new Inputs('div', {
   items: [{
+    title: 'Old password',
+    classInput: 'input set__input set__input--password',
+    classLabel: 'label set__label',
+    name: 'oldPassword',
+    type: 'password',
+    id: 'password',
+  }, {
     title: 'New password',
     classInput: 'input set__input set__input--password-new',
     classLabel: 'label set__label',
@@ -16,12 +23,12 @@ const inputs = new Inputs('div', {
     type: 'password',
     id: 'password_new',
   }, {
-    title: 'Old password',
-    classInput: 'input set__input set__input--password',
+    title: 'Repeat New password',
+    classInput: 'input set__input set__input--password-new',
     classLabel: 'label set__label',
-    name: 'oldPassword',
+    name: 'newPassword',
     type: 'password',
-    id: 'password',
+    id: 'password_new',
   }],
   attr: {
     class: 'set__input-wrapper',
@@ -67,10 +74,11 @@ export default class PasswordPage extends Password {
         submit: (evt) => {
           evt.preventDefault()
           // console.log(document.querySelector('form'))
-          const data = new FormData(document.querySelector('form'))
+          const formData = new FormData(document.querySelector('form'))
+          // const passwords = Object.fromEntries(formData.entries());
           let object = {};
-          data.forEach((value, key) => object[key] = value);
-          // let json = JSON.stringify(object);
+          formData.forEach((value, key) => object[key] = value);
+          // let json = JSON.stringify(passwords);
           if (submitHandler) {
             console.log(object)
             controller.password(object)

@@ -42,7 +42,7 @@ export default class SetPage extends Set {
       id: store.getState().user.id,
       email: store.getState().user.email,
       phone: store.getState().user.phone,
-      login: store.getState().user.avatar,
+      login: store.getState().user.login,
       links,
       attr: {
         class: 'set',

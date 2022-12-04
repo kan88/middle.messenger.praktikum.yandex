@@ -2,7 +2,6 @@ import Chats from '../../components/chats/chats';
 import Links from '/src/templates/components/links/links';
 import Messages from '../../components/messages/messages';
 import Chat from './chat';
-import renderDom from '../../../utils/renderDom';
 import { goHandler } from '../../../utils/Controller';
 import Buttons from '../../components/buttons/buttons';
 import controller from '../../../utils/api/ChatController';
@@ -19,7 +18,7 @@ export const addChatsToStore = async () => {
       class: 'chat',
     },
     events: {
-      click: (evt) => {
+      click: async (evt) => {
         if (evt.target.classList.contains('plus')) {
           document.querySelector('.modal').classList.remove('modal--nodisplay')
           document.querySelector('.modal__input--chatid').value = evt.target.parentElement.dataset.id
@@ -39,6 +38,42 @@ export const addChatsToStore = async () => {
             // let json = JSON.stringify(object);
             controller.removeUser(object);
           })
+        }
+        if (evt.target.classList.contains('chat__item')) {
+          console.log(evt.target.dataset.id)
+          const token = await controller.getToken(evt.target.dataset.id)
+          const chatId = evt.target.dataset.id
+          const userId = await store.getState().user.id
+          const tokenId = token.token
+          const url = `wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${tokenId}`
+          const socket = new WebSocket(url);
+          console.log(chatId, userId, tokenId, url, socket)
+          socket.addEventListener('open', () => {
+            console.log('Соединение установлено');
+
+            socket.send(JSON.stringify({
+              content: 'Моё первое сообщение миру!',
+              type: 'message',
+            }));
+          });
+
+          socket.addEventListener('close', event => {
+            if (event.wasClean) {
+              console.log('Соединение закрыто чисто');
+            } else {
+              console.log('Обрыв соединения');
+            }
+
+            console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+          });
+
+          socket.addEventListener('message', event => {
+            console.log('Получены данные', event.data);
+          });
+
+          socket.addEventListener('error', event => {
+            console.log('Ошибка', event.message);
+          });
         }
       }
     }

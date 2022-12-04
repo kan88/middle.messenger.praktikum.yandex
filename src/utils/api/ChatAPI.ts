@@ -22,6 +22,10 @@ class ChatAPI {
     return this.http.put('/chats/users', data)
   }
 
+  getToken(data: TRegData): void {
+    return this.http.post(`/chats/token/${data}`)
+  }
+
   removeUser(data: TRegData): void {
     return this.http.delete('/chats/users', data)
   }

@@ -70,10 +70,13 @@ export class HTTPTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
       if (method === METHODS.GET || !data) {
+        console.log('get')
         xhr.send();
       } else if (data instanceof FormData) {
+        console.log('formData')
         xhr.send(data);
       } else {
+        console.log('objectXML')
         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
         xhr.send(JSON.stringify(data));
       }

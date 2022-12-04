@@ -13,13 +13,13 @@ class UserAPI {
     this.http = new HTTPTransport();
   }
   user(data: TRegData): void {
-    return this.http.put('/user/profile')
+    return this.http.put('/user/profile', data)
   }
   avatar(data: TRegData): void {
-    return this.http.put('/user/profile/avatar')
+    return this.http.put('/user/profile/avatar', data)
   }
   password(data: TRegData): void {
-    return this.http.put('/user/password')
+    return this.http.put('/user/password', data)
   }
 }
 

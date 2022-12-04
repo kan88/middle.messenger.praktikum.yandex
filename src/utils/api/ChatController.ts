@@ -28,6 +28,11 @@ class ChatController {
     await this.api.logout();
   }
 
+  async getToken(data: any) {
+    const response = await this.api.getToken(data);
+    return response
+  }
+
   async getchats() {
     const response = await this.api.getchats()
     return response
