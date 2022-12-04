@@ -12,6 +12,9 @@ import controller from '../../../utils/api/AuthController';
 import Buttons from '../../components/buttons/buttons';
 import { addChatsToStore } from '../chat';
 import { addUserToStore } from '../set';
+import AvatarPage from '../avatar';
+import UserPage from '../user';
+import PasswordPage from '../password';
 
 
 const inputs = new Inputs('div', {
@@ -119,6 +122,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     .use('/messenger', ChatPage)
     .use('/sign-up', RegPage)
     .use('/settings', SetPage)
+    .use('/avatar', AvatarPage)
+    .use('/user', UserPage)
+    .use('/password', PasswordPage)
     .start();
 
 
