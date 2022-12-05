@@ -30,25 +30,25 @@ const store = new Store();
 // })
 
 
-store.set('messages', {
-  items: [{
-    date: '12.10.22 08:30',
-    text: 'Hi there',
-    class: 'messages__item--user',
-  }, {
-    date: '12.10.22 08:30',
-    text: 'Hi',
-    class: 'messages__item--opponent',
-  }, {
-    date: '12.10.22 08:30',
-    text: 'How are you',
-    class: 'messages__item--user',
-  },
-  ],
-  attr: {
-    class: 'messages',
-  },
-});
+// store.set('messages', {
+//   items: [{
+//     date: '12.10.22 08:30',
+//     text: 'Hi there',
+//     class: 'messages__item--user',
+//   }, {
+//     date: '12.10.22 08:30',
+//     text: 'Hi',
+//     class: 'messages__item--opponent',
+//   }, {
+//     date: '12.10.22 08:30',
+//     text: 'How are you',
+//     class: 'messages__item--user',
+//   },
+//   ],
+//   attr: {
+//     class: 'messages',
+//   },
+// });
 
 export default store;
 // set(state, 'user.name', 'John');

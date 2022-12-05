@@ -37,7 +37,6 @@ class ChatAPI {
   getchats(): void {
     return this.http.get('/chats')
   }
-
 }
 
 export { ChatAPI }

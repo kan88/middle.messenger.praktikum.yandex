@@ -119,7 +119,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   _componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): void {
-    console.log('here render')
+    // console.log('here render')
     const isReRender: boolean = this.componentDidUpdate(oldProps, newProps);
     if (isReRender) {
       this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
@@ -127,8 +127,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): boolean {
-    console.log(oldProps, newProps)
-    // console.log(isEqual(oldProps, newProps))
+    console.log('CDU')
     if (!isEqual(oldProps, newProps)) {
       this._props = newProps
       return true
@@ -151,6 +150,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
     }
 
     if (Object.values(props).length) {
+      console.log('new props')
       Object.assign(this._props, props);
     }
   }
@@ -184,8 +184,8 @@ export default abstract class Block<Props extends Record<string, any> = any> {
         // target[prop as string] = value;
 
         target = value;
-        console.log(oldTarget)
-        console.log(target)
+        // console.log(oldTarget)
+        // console.log(target)
         this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },

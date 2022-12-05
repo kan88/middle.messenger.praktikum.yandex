@@ -9,7 +9,8 @@ import store from '../../../utils/Store';
 import Form from '../../components/form/form';
 import Modal from '../../components/modal/modal';
 import router from '../auth';
-
+let socket;
+let count = 0;
 //записываем в стор список чатов
 export const addChatsToStore = async () => {
   store.set('chats', {
@@ -40,21 +41,27 @@ export const addChatsToStore = async () => {
           })
         }
         if (evt.target.classList.contains('chat__item')) {
-          console.log(evt.target.dataset.id)
+          const messages = document.querySelectorAll('.messages__item')
+          if (messages.length > 0) {
+            messages.forEach((item) => item.remove());
+          }
           const token = await controller.getToken(evt.target.dataset.id)
           const chatId = evt.target.dataset.id
           const userId = await store.getState().user.id
           const tokenId = token.token
           const url = `wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${tokenId}`
-          const socket = new WebSocket(url);
-          console.log(chatId, userId, tokenId, url, socket)
-          socket.addEventListener('open', () => {
-            console.log('Соединение установлено');
-
+          socket = new WebSocket(url);
+          // store.set('socket', { socket })
+          // console.log(chatId, userId, tokenId, url, socket)
+          socket.addEventListener('open', async () => {
             socket.send(JSON.stringify({
-              content: 'Моё первое сообщение миру!',
-              type: 'message',
+              content: '0',
+              type: 'get old',
             }));
+            // socket.send(JSON.stringify({
+            //   content: 'Моё первое сообщение миру!',
+            //   type: 'message',
+            // }));
           });
 
           socket.addEventListener('close', event => {
@@ -67,8 +74,24 @@ export const addChatsToStore = async () => {
             console.log(`Код: ${event.code} | Причина: ${event.reason}`);
           });
 
-          socket.addEventListener('message', event => {
-            console.log('Получены данные', event.data);
+          socket.addEventListener('message', async (event) => {
+            const response = await event.data
+            const object = JSON.parse(response)
+            console.log(store.getState())
+            store.set('messages', {
+              items: object,
+              attr: {
+                class: 'messages',
+              },
+            });
+            count += 1
+            if (count && (count % 2 !== 0)) {
+              socket.send(JSON.stringify({
+                content: '0',
+                type: 'get old',
+              }));
+            }
+            console.log(store.getState())
           });
 
           socket.addEventListener('error', event => {
@@ -119,6 +142,11 @@ const logout = new Buttons('div', {
 });
 
 const form = new Form('form', {
+  classinput: 'main__chat-input',
+  title: 'title',
+  placeholder: 'new chat',
+  titleSubmit: 'newchat',
+  classSubmit: 'set__link',
   attr: {
     class: 'main__chat-form',
     method: 'post',
@@ -132,6 +160,28 @@ const form = new Form('form', {
       data.forEach((value, key) => object[key] = value);
       // let json = JSON.stringify(object);
       controller.create(object);
+    },
+  },
+});
+
+const formMessages = new Form('form', {
+  classinput: 'main__message-input',
+  title: 'content',
+  placeholder: 'new message',
+  titleSubmit: 'new message',
+  classSubmit: 'set__link set__link--message',
+  attr: {
+    class: 'main__message-form',
+    method: 'post',
+  },
+  events: {
+    submit: async (evt) => {
+      evt.preventDefault();
+      // const socket = await store.getState()
+      socket.send(JSON.stringify({
+        content: document.querySelector('.main__message-input').value,
+        type: 'message',
+      }));
     },
   },
 });
@@ -164,6 +214,7 @@ export default class ChatPage extends Chat {
       form,
       chats,
       messages,
+      formMessages,
       attr: {
         class: 'main__chat',
       },

@@ -37,8 +37,6 @@ class ChatController {
     const response = await this.api.getchats()
     return response
   }
-
-
 }
 
 export default new ChatController();
