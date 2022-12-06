@@ -40,28 +40,32 @@ export const addChatsToStore = async () => {
             controller.removeUser(object);
           })
         }
-        if (evt.target.classList.contains('chat__item')) {
+        if (evt.target.classList.contains('chat__message') || evt.target.classList.contains('chat__item') || evt.target.classList.contains('chat__date') || evt.target.classList.contains('chat__name') || evt.target.classList.contains('chat__wrapper')) {
           const messages = document.querySelectorAll('.messages__item')
           if (messages.length > 0) {
             messages.forEach((item) => item.remove());
           }
-          const token = await controller.getToken(evt.target.dataset.id)
-          const chatId = evt.target.dataset.id
+          let parent;
+          if (evt.target.tagName === 'SPAN' || evt.target.tagName === 'H3') {
+            parent = evt.target.parentElement.parentElement
+          }
+          if (evt.target.tagName === 'DIV' || evt.target.tagName === 'P') {
+            parent = evt.target.parentElement
+          }
+          if (evt.target.tagName === 'LI') {
+            parent = evt.target
+          }
+          const token = await controller.getToken(parent.dataset.id)
+          const chatId = parent.dataset.id
           const userId = await store.getState().user.id
           const tokenId = token.token
           const url = `wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${tokenId}`
           socket = new WebSocket(url);
-          // store.set('socket', { socket })
-          // console.log(chatId, userId, tokenId, url, socket)
           socket.addEventListener('open', async () => {
             socket.send(JSON.stringify({
               content: '0',
               type: 'get old',
             }));
-            // socket.send(JSON.stringify({
-            //   content: 'Моё первое сообщение миру!',
-            //   type: 'message',
-            // }));
           });
 
           socket.addEventListener('close', event => {
@@ -77,7 +81,6 @@ export const addChatsToStore = async () => {
           socket.addEventListener('message', async (event) => {
             const response = await event.data
             const object = JSON.parse(response)
-            console.log(store.getState())
             store.set('messages', {
               items: object,
               attr: {
@@ -91,7 +94,6 @@ export const addChatsToStore = async () => {
                 type: 'get old',
               }));
             }
-            console.log(store.getState())
           });
 
           socket.addEventListener('error', event => {

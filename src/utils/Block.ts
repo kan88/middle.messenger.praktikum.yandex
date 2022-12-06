@@ -121,8 +121,6 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   _componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): void {
     const isReRender: boolean = this.componentDidUpdate(oldProps, newProps);
     if (isReRender) {
-      console.log(oldProps, newProps)
-      console.log('here render')
       this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
     }
   }
@@ -156,7 +154,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   _render(): void {
-    console.log('_render')
+    // console.log('_render')
     const block: Node | void = this.render();
     this.removeEvents();
     this._element.innerHTML = '';
@@ -203,7 +201,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   show(): void {
-    console.log('Block-show');
+    // console.log('Block-show');
     this.getContent().style.display = 'block';
   }
 

@@ -28,7 +28,7 @@ const inputs = new Inputs('div', {
     classLabel: 'label set__label',
     name: 'newPassword',
     type: 'password',
-    id: 'password_new',
+    id: 'password_new--repeat',
   }],
   attr: {
     class: 'set__input-wrapper',
