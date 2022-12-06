@@ -8,8 +8,6 @@ class Messages extends Block {
   }
 }
 
-const messagesWithStore = connect((state) => ({
-  messages: state.messages,
-}))
+const messagesWithStore = connect((state) => state.messages)
 
 export default messagesWithStore(Messages)

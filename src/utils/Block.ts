@@ -119,17 +119,18 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   _componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): void {
-    // console.log('here render')
     const isReRender: boolean = this.componentDidUpdate(oldProps, newProps);
     if (isReRender) {
+      console.log(oldProps, newProps)
+      console.log('here render')
       this._eventBus.emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
   componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): boolean {
-    console.log('CDU')
+    // console.log(oldProps, newProps)
     if (!isEqual(oldProps, newProps)) {
-      this._props = newProps
+      // this._props = newProps
       return true
     };
   }
@@ -150,12 +151,12 @@ export default abstract class Block<Props extends Record<string, any> = any> {
     }
 
     if (Object.values(props).length) {
-      console.log('new props')
       Object.assign(this._props, props);
     }
   }
 
   _render(): void {
+    console.log('_render')
     const block: Node | void = this.render();
     this.removeEvents();
     this._element.innerHTML = '';
@@ -180,10 +181,11 @@ export default abstract class Block<Props extends Record<string, any> = any> {
         return typeof (value) === 'function' ? value.bind(target) : value;
       },
       set: (target: TypeMixed, prop: string, value) => {
-        const oldTarget = cloneDeep(target);
+        const oldTarget = { ...target };
+        target[prop] = value;
         // target[prop as string] = value;
 
-        target = value;
+        // target = value;
         // console.log(oldTarget)
         // console.log(target)
         this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
