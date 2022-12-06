@@ -103,8 +103,8 @@ export const addChatsToStore = async () => {
   });
 }
 
-const chats = new Chats({});
-const messages = new Messages({});
+const chats = new Chats();
+const messages = new Messages();
 
 const settings = new Links('div', {
   items: [{

@@ -1,4 +1,4 @@
 .parcel-cache
 /node_modules
-/dist
-/src/index.ts
+# /dist
+# /src/index.ts
