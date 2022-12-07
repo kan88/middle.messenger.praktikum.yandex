@@ -7,8 +7,8 @@ const template: string = `
 {{{chats}}}
 </div>
 <div class='main__messages-wrapper'>
-{{{messages}}}
 {{{formMessages}}}
+{{{messages}}}
 </div>
 <div class="modal modal--nodisplay">
 <div class="modal__content"

@@ -2,7 +2,7 @@ const template: string = `
 <h2 class="title reg__title">{{title}}</h2>
 <ul class="user__list">
 <li class="user__item user__item--avatar">
-<img src="{{avatar}}" width="150" height="150" alt="avatar">
+<img src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" width="150" height="150" alt="avatar">
 </li>
 <li class="user__item user__item--nick">Nickname:{{nick}}</li>
 <li class="user__item user__item--first">Firstname:{{first}}</li>

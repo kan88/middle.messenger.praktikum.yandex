@@ -1,6 +1,6 @@
 // generic types
 
-export type TypeDict<T> = {
+export type TypeDict<Block> = {
   [key: string | number]: T
 }
 

@@ -7,7 +7,7 @@ import isBlockArray from '../utils/isBlockArray';
 import isEqual from './isEqual';
 import { cloneDeep } from './cloneDeep';
 
-export default abstract class Block<Props extends Record<string, any> = any> {
+export default abstract class Block<Block> {
   static EVENTS: TypeDict<string> = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',

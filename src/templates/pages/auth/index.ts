@@ -85,15 +85,9 @@ class Form extends Auth {
           const data = new FormData(document.querySelector('form'))
           let object = {};
           data.forEach((value, key) => object[key] = value);
-          // let json = JSON.stringify(object);
           if (submitHandler) {
             controller.create(object)
               .then(() => window.location.reload())
-
-            // .then((response) => console.log(response))
-            // console.log(response)
-            // console.log(response.ok)
-            // console.log(response.status)
 
           }
         }
@@ -102,18 +96,7 @@ class Form extends Auth {
   }
 }
 
-// renderDom('.app', form);
-// const createChatPage = () => {
-//   return new ChatPage
-// }
 const router = new Router('.app');
-// router
-//   .use('/', Form)
-//   .use('/messenger', ChatPage)
-//   .use('/sign-up', RegPage)
-//   .use('/settings', SetPage)
-//   .start();
-// console.log('here2')
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -139,9 +122,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else {
     await addChatsToStore()
     await router.go('/messenger')
-    // const user = await isLogined();
-    // console.log(user)
-    // await addUserToStore(user)
 
     console.log(store)
   }

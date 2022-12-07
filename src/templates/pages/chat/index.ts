@@ -80,7 +80,13 @@ export const addChatsToStore = async () => {
 
           socket.addEventListener('message', async (event) => {
             const response = await event.data
-            const object = JSON.parse(response)
+            let object
+            try {
+              object = JSON.parse(response)
+            } catch {
+              (err) => console.log(err)
+            }
+
             store.set('messages', {
               items: object,
               attr: {
@@ -154,14 +160,18 @@ const form = new Form('form', {
     method: 'post',
   },
   events: {
-    submit: (evt) => {
+    submit: async (evt) => {
       evt.preventDefault();
-      console.log(evt)
       const data = new FormData(document.querySelector('.main__chat-form'));
       const object = {};
       data.forEach((value, key) => object[key] = value);
-      // let json = JSON.stringify(object);
-      controller.create(object);
+      try {
+        await controller.create(object)
+        await addChatsToStore()
+        console.log(store)
+      } catch {
+        (err) => console.log(err)
+      }
     },
   },
 });
@@ -184,6 +194,7 @@ const formMessages = new Form('form', {
         content: document.querySelector('.main__message-input').value,
         type: 'message',
       }));
+      document.querySelector('.main__message-input').value = ''
     },
   },
 });
@@ -203,7 +214,11 @@ const modalAdd = new Modal('form', {
         "users": [user],
         "chatId": chat
       };
-      controller.addUser(object);
+      try {
+        controller.addUser(object);
+      } catch {
+        (err) => console.log(err)
+      }
     }
   },
 })
