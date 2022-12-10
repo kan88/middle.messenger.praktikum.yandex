@@ -1,5 +1,5 @@
 .chat {
-  width: 30%;
+  width: 100%;
   border: 1px solid $denary;
 }
 
@@ -27,4 +27,8 @@
   margin: 0;
   font-size: 10px;
   text-align: left;
+}
+
+.chat__item {
+  border: 1px solid #000000;
 }

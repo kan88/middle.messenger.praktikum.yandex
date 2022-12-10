@@ -1,8 +1,13 @@
 import template from './messages.tmpl';
 import Block from '../../../utils/Block';
-
-export default class Messages extends Block {
+import connect from '../../../utils/connect';
+import store from '../../../utils/Store';
+class Messages extends Block {
   render() {
     return this.compile(template);
   }
 }
+
+const messagesWithStore = connect((state) => state.messages)
+
+export default messagesWithStore(Messages)

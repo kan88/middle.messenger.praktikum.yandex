@@ -1,4 +1,30 @@
 .main__chat {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  max-height: 100vh;
+}
+
+.main__chat-wrapper {
+  display: inline-block;
+  width: 50%;
+  border: 1px solid $secondary;
+}
+
+.main__chat-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.main__messages-wrapper {
+  width: 50%;
+  border: 1px solid $secondary;
+  overflow: scroll;
+}
+
+.main__message-input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
 }

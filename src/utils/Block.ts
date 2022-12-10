@@ -4,8 +4,10 @@ import EventBus from './Eventbus';
 import { TypeDict, TypeMixed } from './types';
 import isBlock from '../utils/isBlock';
 import isBlockArray from '../utils/isBlockArray';
+import isEqual from './isEqual';
+import { cloneDeep } from './cloneDeep';
 
-export default abstract class Block<Props extends Record<string, any> = any> {
+export default abstract class Block<Block> {
   static EVENTS: TypeDict<string> = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -124,9 +126,11 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): boolean {
-    console.log(newProps, oldProps);
-
-    return true;
+    // console.log(oldProps, newProps)
+    if (!isEqual(oldProps, newProps)) {
+      // this._props = newProps
+      return true
+    };
   }
 
   setProps(newProps: TypeMixed): void {
@@ -150,6 +154,7 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   _render(): void {
+    // console.log('_render')
     const block: Node | void = this.render();
     this.removeEvents();
     this._element.innerHTML = '';
@@ -174,9 +179,14 @@ export default abstract class Block<Props extends Record<string, any> = any> {
         return typeof (value) === 'function' ? value.bind(target) : value;
       },
       set: (target: TypeMixed, prop: string, value) => {
-        const oldProp = { ...target };
+        const oldTarget = { ...target };
         target[prop] = value;
-        this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldProp, target);
+        // target[prop as string] = value;
+
+        // target = value;
+        // console.log(oldTarget)
+        // console.log(target)
+        this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
     });
@@ -191,13 +201,12 @@ export default abstract class Block<Props extends Record<string, any> = any> {
   }
 
   show(): void {
-    console.log('Block-show');
+    // console.log('Block-show');
     this.getContent().style.display = 'block';
   }
 
   hide(): void {
-    console.log('Block-hide');
-    this.getContent().style.display = 'none';
+    this.getContent().remove();
   }
 
   compile(template: string, props?: TypeMixed): DocumentFragment {

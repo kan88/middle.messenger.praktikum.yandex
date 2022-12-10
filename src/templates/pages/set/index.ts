@@ -1,105 +1,53 @@
 import Set from './set';
-import renderDom from '../../../utils/renderDom';
-import Buttons from '../../components/buttons/buttons';
-import Inputs from '../../components/inputs/inputs';
-import { validationHandler, submitHandler } from '../../../utils/Controller';
+import { goHandler } from '../../../utils/Controller';
+import Links from '../../components/links/links';
+import store from '../../../utils/Store';
 
-const inputs = new Inputs('div', {
-  items: [{
-    title: 'Avatar',
-    classInput: 'input set__input set__input--avatar',
-    classLabel: 'label set__label',
-    name: 'avatar',
-    type: 'file',
-    id: 'avatar',
-  }, {
-    title: 'First name',
-    classInput: 'input set__input set__input--first-name',
-    classLabel: 'label set__label',
-    name: 'first_name',
-    type: 'text',
-    id: 'first_name',
-  }, {
-    title: 'Second name',
-    classInput: 'input set__input set__input--second-name',
-    classLabel: 'label set__label',
-    name: 'second_name',
-    type: 'text',
-    id: 'second_name',
-  }, {
-    title: 'Nick name',
-    classInput: 'input set__input set__input--nick-name',
-    classLabel: 'label set__label',
-    name: 'display_name',
-    type: 'text',
-    id: 'display_name',
-  }, {
-    title: 'Login',
-    classInput: 'input set__input set__input--login',
-    classLabel: 'label set__label',
-    name: 'login',
-    type: 'text',
-    id: 'login',
-  }, {
-    title: 'Email',
-    classInput: 'input set__input set__input--email',
-    classLabel: 'label set__label',
-    name: 'email',
-    type: 'text',
-    id: 'email',
-  }, {
-    title: 'Phone',
-    classInput: 'input set__input set__input--phone',
-    classLabel: 'label set__label',
-    name: 'phone',
-    type: 'text',
-    id: 'phone',
-  },
-  {
-    title: 'New password',
-    classInput: 'input set__input set__input--password-new',
-    classLabel: 'label set__label',
-    name: 'password_new',
-    type: 'password',
-    id: 'password_new',
-  }, {
-    title: 'Password',
-    classInput: 'input set__input set__input--password',
-    classLabel: 'label set__label',
-    name: 'password',
-    type: 'password',
-    id: 'password',
-  }],
-  attr: {
-    class: 'set__input-wrapper',
-  },
-  events: {
-    focusin: validationHandler,
-    focusout: validationHandler,
-  },
-});
+console.log('set')
 
-const buttons = new Buttons('div', {
+export const addUserToStore = async (data) => {
+  store.set('user', data)
+}
+
+const links = new Links('div', {
   items: [{
-    type: 'submit',
-    class: 'btn btn--save',
-    title: 'Save information',
+    url: '*/avatar',
+    title: 'Avatar change',
+    class: 'btn btn__link btn__link--reg',
+  }, {
+    url: '*/user',
+    title: 'Info change',
+    class: 'btn btn__link btn__link--reg',
+  }, {
+    url: '*/password',
+    title: 'Pass change',
+    class: 'btn btn__link btn__link--reg',
   }],
   attr: {
     class: 'set__btn-wrapper',
   },
-});
-
-const set = new Set('form', {
-  title: 'Settings',
-  inputs,
-  buttons,
-  attr: {
-    class: 'form set',
-  },
   events: {
-    submit: submitHandler,
+    click: goHandler,
   },
 });
 
-renderDom('.app', set);
+export default class SetPage extends Set {
+  constructor() {
+    super('div', {
+      title: 'Settings',
+      avatar: store.getState().user.avatar ? store.getState().user.avatar : 'https://trikky.ru/wp-content/blogs.dir/1/files/2021/12/30/chat-avatar-136.jpg',
+      nick: store.getState().user.display_name ? store.getState().user.display_name : 'no login',
+      first: store.getState().user.first_name,
+      second: store.getState().user.second_name,
+      id: store.getState().user.id,
+      email: store.getState().user.email,
+      phone: store.getState().user.phone,
+      login: store.getState().user.login,
+      links,
+      attr: {
+        class: 'set',
+      },
+    });
+  }
+}
+// renderDom('.app', set);
