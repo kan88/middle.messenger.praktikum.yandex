@@ -1,12 +1,16 @@
 {
-  "name": "yandex-middle-dev",
+  "name": "my-webpack-project",
   "version": "1.0.0",
-  "description": "online six month course in yandex practicum",
+  "description": "My webpack project",
   "scripts": {
-    "start": "node src/server.js",
-    "build": "parcel build src/index.html --no-optimize",
+    "start": "node server.js",
+    "all": "webpack --mode=production --node-env=production",
     "lint": "eslint src/**/**/*.ts src/*.js --fix",
-    "stylelint": "stylelint --fix \"src/sass/**/*.scss\" --custom-syntax postcss-scss"
+    "stylelint": "stylelint --fix \"src/sass/**/*.scss\" --custom-syntax postcss-scss",
+    "build": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -24,33 +28,36 @@
   },
   "homepage": "https://github.com/kan88/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-
-    "@typescript-eslint/eslint-plugin": "5.40.1",
-    "@typescript-eslint/parser": "5.40.1",
-    "eslint": "8.26.0",
-    "eslint-config-airbnb": "19.0.4",
-    "stylelint": "14.14.0",
-    "stylelint-config-htmlacademy": "1.1.2",
-    "typescript": "4.8.4",
     "@anikin/parcel-transformer-handlebars": "1.0.9",
     "@parcel/transformer-sass": "2.7.0",
+    "@typescript-eslint/eslint-plugin": "5.40.1",
+    "@typescript-eslint/parser": "5.40.1",
+    "@webpack-cli/generators": "^3.0.1",
+    "css-loader": "^6.7.1",
+    "eslint": "8.26.0",
+    "eslint-config-airbnb": "19.0.4",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
     "postcss-scss": "4.0.5",
-    "parcel": "2.7.0"
+    "prettier": "^2.6.2",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "stylelint": "14.14.0",
+    "stylelint-config-htmlacademy": "1.1.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.8.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
+    "express": "4.18.2",
     "handlebars": "4.7.7",
-    "uuid": "9.0.0",
     "npm-path": "2.0.4",
-    "express": "4.18.2"
+    "uuid": "9.0.0"
   },
   "engines": {
     "node": ">=14.0"
-  },
-  "targets": {
-    "default": {
-      "engines": {
-        "browsers": ">= 50%"
-      }
-    }
   }
 }
