@@ -1,10 +1,9 @@
 import HTTPTransport from '../http';
+
 type TRegData = {
   login: string;
   password: string;
 };
-
-const route = new HTTPTransport();
 
 class UserAPI {
   protected http: HTTPTransport;
@@ -12,15 +11,18 @@ class UserAPI {
   constructor() {
     this.http = new HTTPTransport();
   }
+
   user(data: TRegData): void {
-    return this.http.put('/user/profile', data)
+    return this.http.put('/user/profile', data);
   }
+
   avatar(data: TRegData): void {
-    return this.http.put('/user/profile/avatar', data)
+    return this.http.put('/user/profile/avatar', data);
   }
+
   password(data: TRegData): void {
-    return this.http.put('/user/password', data)
+    return this.http.put('/user/password', data);
   }
 }
 
-export { UserAPI }
+export { UserAPI };

@@ -1,9 +1,7 @@
 import Password from './password';
-// import renderDom from '../../../utils/renderDom';
 import Buttons from '../../components/buttons/buttons';
 import Inputs from '../../components/inputs/inputs';
 import { validationHandler, submitHandler } from '../../../utils/Controller';
-import store from '../../../utils/Store';
 import controller from '../../../utils/api/UserController';
 
 

@@ -69,18 +69,6 @@ const buttons = new Buttons('div', {
 
 });
 
-// const reg = new Reg('form', {
-//   inputs,
-//   buttons,
-//   attr: {
-//     class: 'form reg',
-//   },
-//   events: {
-//     submit: submitHandler,
-//   },
-
-// });
-
 export default class RegPage extends Reg {
   constructor() {
     super('form', {
@@ -106,4 +94,3 @@ export default class RegPage extends Reg {
   }
 }
 
-// renderDom('.app', reg);

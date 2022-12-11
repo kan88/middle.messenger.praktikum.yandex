@@ -1,4 +1,4 @@
-import { ChatAPI } from "./ChatAPI";
+import { ChatAPI } from './ChatAPI';
 
 class ChatController {
   private api: ChatAPI;
@@ -6,11 +6,6 @@ class ChatController {
   constructor() {
     this.api = new ChatAPI();
   }
-
-  // regPost(evt: any): void {
-  //   const formData = new FormData(evt)
-  //   const Registration = new RegAPI(formData)
-  // }
 
   async create(data: any) {
     await this.api.create(data);
@@ -30,12 +25,12 @@ class ChatController {
 
   async getToken(data: any) {
     const response = await this.api.getToken(data);
-    return response
+    return response;
   }
 
   async getchats() {
-    const response = await this.api.getchats()
-    return response
+    const response = await this.api.getchats();
+    return response;
   }
 }
 

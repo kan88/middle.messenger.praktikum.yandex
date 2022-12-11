@@ -5,8 +5,6 @@ type TRegData = {
   password: string;
 };
 
-const route = new HTTPTransport();
-
 class ChatAPI {
   protected http: HTTPTransport;
 
@@ -15,28 +13,28 @@ class ChatAPI {
   }
 
   create(data: TRegData): void {
-    return this.http.post('/chats', data)
+    return this.http.post('/chats', data);
   }
 
   addUser(data: TRegData): void {
-    return this.http.put('/chats/users', data)
+    return this.http.put('/chats/users', data);
   }
 
   getToken(data: TRegData): void {
-    return this.http.post(`/chats/token/${data}`)
+    return this.http.post(`/chats/token/${data}`);
   }
 
   removeUser(data: TRegData): void {
-    return this.http.delete('/chats/users', data)
+    return this.http.delete('/chats/users', data);
   }
 
   logout(): void {
-    return this.http.post('/auth/logout')
+    return this.http.post('/auth/logout');
   }
 
   getchats(): void {
-    return this.http.get('/chats')
+    return this.http.get('/chats');
   }
 }
 
-export { ChatAPI }
+export { ChatAPI };
