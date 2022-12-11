@@ -5,7 +5,7 @@ type TRegData = {
   password: string;
 };
 
-class ChatAPI {
+export default class ChatAPI {
   protected http: HTTPTransport;
 
   constructor() {

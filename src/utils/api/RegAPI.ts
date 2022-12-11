@@ -9,7 +9,7 @@ type TRegData = {
   password: string;
 };
 
-class RegAPI {
+export default class RegAPI {
   protected http: HTTPTransport;
 
   constructor() {
@@ -20,5 +20,3 @@ class RegAPI {
     return this.http.post('/auth/signup', data);
   }
 }
-
-export { RegAPI };
