@@ -6,7 +6,7 @@ type TRegData = {
   password: string;
 };
 
-export default class AuthAPI {
+class AuthAPI {
   protected http: HTTPTransport;
 
   constructor() {
@@ -23,3 +23,5 @@ export default class AuthAPI {
     return this.http.post('/auth/signin', data);
   }
 }
+
+export { AuthAPI };

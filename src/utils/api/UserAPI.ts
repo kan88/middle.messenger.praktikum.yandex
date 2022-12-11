@@ -5,7 +5,7 @@ type TRegData = {
   password: string;
 };
 
-export default class UserAPI {
+class UserAPI {
   protected http: HTTPTransport;
 
   constructor() {
