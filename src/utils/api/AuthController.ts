@@ -1,4 +1,4 @@
-import { AuthAPI } from "./AuthAPI";
+import { AuthAPI } from './AuthAPI';
 
 class AuthController {
   private api: AuthAPI;
@@ -7,10 +7,6 @@ class AuthController {
     this.api = new AuthAPI();
   }
 
-  // regPost(evt: any): void {
-  //   const formData = new FormData(evt)
-  //   const Registration = new RegAPI(formData)
-  // }
   async user() {
     await this.api.user();
   }
@@ -18,8 +14,6 @@ class AuthController {
   async create(data: any) {
     await this.api.create(data);
   }
-
-
 }
 
 export default new AuthController();

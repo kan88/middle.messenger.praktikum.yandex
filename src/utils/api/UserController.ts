@@ -1,4 +1,4 @@
-import { UserAPI } from "./UserAPI";
+import { UserAPI } from './UserAPI';
 
 class UserController {
   private api: UserAPI;
@@ -7,10 +7,6 @@ class UserController {
     this.api = new UserAPI();
   }
 
-  // regPost(evt: any): void {
-  //   const formData = new FormData(evt)
-  //   const Registration = new RegAPI(formData)
-  // }
   async user(data: any) {
     await this.api.user(data);
   }
@@ -22,8 +18,6 @@ class UserController {
   async password(data: any) {
     await this.api.password(data);
   }
-
-
 }
 
 export default new UserController();

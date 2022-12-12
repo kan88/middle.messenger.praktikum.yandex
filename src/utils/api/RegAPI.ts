@@ -1,5 +1,4 @@
 import HTTPTransport from '../http';
-import { BaseAPI } from './BaseAPI';
 
 type TRegData = {
   first_name: string;
@@ -10,8 +9,6 @@ type TRegData = {
   password: string;
 };
 
-const route = new HTTPTransport();
-
 class RegAPI {
   protected http: HTTPTransport;
 
@@ -20,8 +17,8 @@ class RegAPI {
   }
 
   create(data: TRegData): void {
-    return this.http.post('/auth/signup', data)
+    return this.http.post('/auth/signup', data);
   }
 }
 
-export { RegAPI }
+export { RegAPI };

@@ -1,5 +1,4 @@
 import Reg from './reg';
-import renderDom from '../../../utils/renderDom';
 import Buttons from '../../components/buttons/buttons';
 import Inputs from '../../components/inputs/inputs';
 import { validationHandler, submitHandler } from '../../../utils/Controller';
@@ -70,18 +69,6 @@ const buttons = new Buttons('div', {
 
 });
 
-// const reg = new Reg('form', {
-//   inputs,
-//   buttons,
-//   attr: {
-//     class: 'form reg',
-//   },
-//   events: {
-//     submit: submitHandler,
-//   },
-
-// });
-
 export default class RegPage extends Reg {
   constructor() {
     super('form', {
@@ -93,11 +80,9 @@ export default class RegPage extends Reg {
       events: {
         submit: (evt) => {
           evt.preventDefault()
-          // console.log(document.querySelector('form'))
           const data = new FormData(document.querySelector('form'))
           let object = {};
           data.forEach((value, key) => object[key] = value);
-          // let json = JSON.stringify(object);
           if (submitHandler) {
             controller.create(object)
           }
@@ -107,4 +92,3 @@ export default class RegPage extends Reg {
   }
 }
 
-// renderDom('.app', reg);

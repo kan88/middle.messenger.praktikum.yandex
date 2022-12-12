@@ -5,7 +5,6 @@ import { TypeDict, TypeMixed } from './types';
 import isBlock from '../utils/isBlock';
 import isBlockArray from '../utils/isBlockArray';
 import isEqual from './isEqual';
-import { cloneDeep } from './cloneDeep';
 
 export default abstract class Block<Block> {
   static EVENTS: TypeDict<string> = {
@@ -126,9 +125,7 @@ export default abstract class Block<Block> {
   }
 
   componentDidUpdate(oldProps: TypeMixed & TypeDict<Block>, newProps: TypeMixed & TypeDict<Block>): boolean {
-    // console.log(oldProps, newProps)
     if (!isEqual(oldProps, newProps)) {
-      // this._props = newProps
       return true
     };
   }
@@ -154,7 +151,6 @@ export default abstract class Block<Block> {
   }
 
   _render(): void {
-    // console.log('_render')
     const block: Node | void = this.render();
     this.removeEvents();
     this._element.innerHTML = '';
@@ -181,11 +177,6 @@ export default abstract class Block<Block> {
       set: (target: TypeMixed, prop: string, value) => {
         const oldTarget = { ...target };
         target[prop] = value;
-        // target[prop as string] = value;
-
-        // target = value;
-        // console.log(oldTarget)
-        // console.log(target)
         this._eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
@@ -201,7 +192,6 @@ export default abstract class Block<Block> {
   }
 
   show(): void {
-    // console.log('Block-show');
     this.getContent().style.display = 'block';
   }
 

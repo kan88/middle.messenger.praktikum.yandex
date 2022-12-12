@@ -15,6 +15,7 @@ import { addUserToStore } from '../set';
 import AvatarPage from '../avatar';
 import UserPage from '../user';
 import PasswordPage from '../password';
+import "../../../sass/style.scss";
 
 
 const inputs = new Inputs('div', {
